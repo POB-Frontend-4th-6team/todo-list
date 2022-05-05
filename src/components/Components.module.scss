@@ -1,0 +1,9 @@
+@use '/src/styles/constants/colors';
+
+.container {
+  width: 360px;
+  height: 720px;
+  padding: 70px 40px;
+  background-color: colors.$MAIN_BACKGROUND;
+  border-radius: 60px;
+}
