@@ -1,7 +1,12 @@
-import Container from '../../components/Container'
+import styles from './MainPage.module.scss'
+import TodoList from './todoList/TodoList'
 
 function MainPage() {
-  return <Container>MainPage</Container>
+  return (
+    <div className={styles.mainPageTodoList}>
+      <TodoList />
+    </div>
+  )
 }
 
 export default MainPage
