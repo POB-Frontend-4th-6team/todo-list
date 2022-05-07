@@ -3,8 +3,6 @@ import styles from './TodoCategory.module.scss'
 import cx from 'classnames'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 
-
-
 const CATE_LIST = [
   {
     id: 1,
@@ -35,21 +33,21 @@ const CATE_LIST = [
 
 const TOTAL_SLIDES = 3
 
-function TodoCategory () {
+function TodoCategory() {
   const [currentCate, setCate] = useState('all')
   const [currentIndex, setIndex] = useState(0)
   const catesRef = useRef()
 
   const handleClickCate = (e) => {
     const { dataset } = e.currentTarget
-    const {category} = dataset
+    const { category } = dataset
 
     setCate(() => {
       const newCate = category
       return newCate
     })
   }
-  
+
   const handlePrev = () => {
     if (currentIndex) {
       setIndex(currentIndex - 1)
@@ -59,36 +57,36 @@ function TodoCategory () {
   const handleNext = () => {
     if (currentIndex < TOTAL_SLIDES) {
       setIndex(currentIndex + 1)
-    } 
+    }
   }
-
 
   useEffect(() => {
     catesRef.current.style.transform = `translateX(-${currentIndex * 13}0px)`
-  },[currentIndex])
+  }, [currentIndex])
 
   return (
     <section className={styles.todoCategory}>
-      <h3>Cateogories</h3>
+      <h3>Categories</h3>
       <div className={styles.cateWrap}>
         <button type='button' className={styles.arrowBtn} onClick={handlePrev}>
-          <FaArrowLeft/>
+          <FaArrowLeft />
         </button>
         <button type='button' className={styles.arrowBtn} onClick={handleNext}>
           <FaArrowRight />
         </button>
         <ul className={styles.categoryList} ref={catesRef}>
-          {CATE_LIST.map((cate) => (    
-            <li key={`category-${cate.id}`} className ={cx(styles.category, {[styles.isActive] : cate.category ===  currentCate})}>
-              <button className={styles.cateBtn} type='button' data-category={cate.category}  onClick={handleClickCate}> 
+          {CATE_LIST.map((cate) => (
+            <li
+              key={`category-${cate.id}`}
+              className={cx(styles.category, { [styles.isActive]: cate.category === currentCate })}
+            >
+              <button className={styles.cateBtn} type='button' data-category={cate.category} onClick={handleClickCate}>
                 <span className={styles.cateTasks}>
                   {/* 수정 필요 */}
                   12 tasks
                 </span>
                 <span className={styles.cateTitle}>{cate.text}</span>
-                <div className={cx(styles.taskProgress, styles[cate.category])}>
-                  {/* 수정 필요 */}
-                </div>
+                <div className={cx(styles.taskProgress, styles[cate.category])}>{/* 수정 필요 */}</div>
               </button>
             </li>
           ))}
@@ -97,7 +95,7 @@ function TodoCategory () {
       <p>
         {/* category 값 */}
         {currentCate}
-      </p>     
+      </p>
     </section>
   )
 }
