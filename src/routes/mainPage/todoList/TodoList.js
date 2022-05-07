@@ -47,7 +47,7 @@ const Tasks = [
   },
 ]
 
-localStorage.setItem('data', JSON.stringify(Tasks))
+localStorage.setItem('task', JSON.stringify(Tasks))
 
 const nowDate = new Date().toISOString().slice(0, 10)
 
@@ -56,16 +56,16 @@ function TodoList({ currentCate }) {
 
   // 마운트시 현재 날짜보다 만료일이 작은 값들만 추출 후 state변경
   useEffect(() => {
-    let data = localStorage.getItem('data')
+    let data = localStorage.getItem('task')
     data = JSON.parse(data).filter((task) => new Date(task.expiry_date) > new Date(nowDate))
 
     localStorage.clear()
-    localStorage.setItem('data', JSON.stringify(data))
+    localStorage.setItem('task', JSON.stringify(data))
     setTaskState(data)
   }, [])
 
   useEffect(() => {
-    let data = localStorage.getItem('data')
+    let data = localStorage.getItem('task')
     data = JSON.parse(data)
 
     if (currentCate === 'all') setTaskState(data)
@@ -74,13 +74,13 @@ function TodoList({ currentCate }) {
 
   const onClick = useCallback((id, completed) => {
     // 로컬 따로 state따로 값을 변경해야함
-    let data = localStorage.getItem('data')
+    let data = localStorage.getItem('task')
     data = JSON.parse(data)
     const newList = [...data]
     const targetIndex = data.findIndex((task) => task.id === Number(id))
     newList[targetIndex].completed = !completed
     localStorage.clear()
-    localStorage.setItem('data', JSON.stringify(newList))
+    localStorage.setItem('task', JSON.stringify(newList))
 
     setTaskState((prev) => {
       const targetIndex = prev.findIndex((task) => task.id === Number(id))

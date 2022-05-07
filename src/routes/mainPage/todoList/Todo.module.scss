@@ -64,8 +64,8 @@
   position: relative;
   width: 80%;
   height: 100%;
-  overflow-y: auto;
   font-size: sizes.$TASK_FONT_SIZE;
+  text-overflow: ellipsis;
   white-space: nowrap;
 
   .taskMessage {
