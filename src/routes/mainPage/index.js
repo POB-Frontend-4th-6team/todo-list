@@ -8,17 +8,23 @@ import styles from './MainPage.module.scss'
 import buttonStyles from './components/RoundButton.module.scss'
 import RoundButton from './components/RoundButton'
 import TodoList from './todoList/TodoList'
+import TodoCategory from './TodoCategory'
+import Header from '../../components/Header/Header'
 
 const cx = classNames.bind(buttonStyles)
 
 function MainPage() {
   return (
-    <div className={styles.mainPage}>
-      <div className={styles.mainPageTodoList}>
-        <TodoList />
+    <>
+      <Header />
+      <div className={styles.mainPage}>
+        <TodoCategory />
+        <div className={styles.mainPageTodoList}>
+          <TodoList />
+        </div>
+        <FloatButton />
       </div>
-      <FloatButton />
-    </div>
+    </>
   )
 }
 
