@@ -5,6 +5,7 @@ import Button from './Components/Button'
 import LightSpeed from 'react-reveal/LightSpeed'
 import avatar from './Components/Avatars/avatar1.png'
 import Header from '../../components/Header/Header'
+import { BsCalendarCheck } from 'react-icons/bs'
 
 function SettingPage() {
   const [userId, setUserId] = useState('iamchho')
@@ -64,6 +65,13 @@ function SettingPage() {
               )}
               <h1 className={styles.usernameHeader}>User ID</h1>
               <p>{userId}</p>
+
+              <Link to='/history' target='_top'>
+                <h2 className={styles.historyContainer}>
+                  <BsCalendarCheck className={styles.calendarIcon} />
+                  Check Consistency
+                </h2>
+              </Link>
             </header>
             <div>
               <Button handler={handleChange}>{changeName ? 'Save' : 'Change'}</Button>
@@ -73,7 +81,7 @@ function SettingPage() {
           <div className={styles.settingSave}>
             <header>
               <p>
-                For safe use of Todo, <br /> <br />
+                For <span>safe use</span> of App, <br /> <br />
                 Please log out.
               </p>
               <Link to='/' target='_top'>
