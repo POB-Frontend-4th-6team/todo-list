@@ -33,10 +33,43 @@ const CATE_LIST = [
 
 const TOTAL_SLIDES = 3
 
+
 function TodoCategory() {
   const [currentCate, setCate] = useState('all')
   const [currentIndex, setIndex] = useState(0)
+
+  const [allTask, setTask] = useState(0)
+  const [businessTask, setBusiness] = useState(0)
+  const [healthTask, setHealth] = useState(0)
+  const [personalTask, setPersonal] = useState(0)
+  const [hobbyTask, setHobby] = useState(0)
+  const [allCompleted, setAllCompleted] = useState(0)
+  const [bsCompleted, setBsCompleted] = useState(0)
+  const [heCompleted, setHeCompleted] = useState(0)
+  const [perCompleted, setPerCompleted] = useState(0)
+  const [hobCompleted, setHobCompleted] = useState(0)
+
   const catesRef = useRef()
+
+  const taskState = [ allTask, businessTask, healthTask, personalTask, hobbyTask ]
+  const taskProgress = [allCompleted, bsCompleted, heCompleted, perCompleted, hobCompleted]
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const task = localStorage.getItem('task') === null ? [] : JSON.parse(localStorage.getItem('task'))
+  
+  useEffect(() => {
+    setTask( Object.keys(task).length )
+    setAllCompleted(() => allTask === 0 ? 0 : task.filter((item) => item.category === 'all' && item.completed).length / allTask  * 100 )
+    setBusiness( task.filter((item) => item.category === 'business').length )
+    setBsCompleted(() =>  businessTask === 0 ? 0 : task.filter((item) => item.category === 'business' && item.completed).length / businessTask  * 100 )
+    setHealth( task.filter((item) => item.category === 'health').length )
+    setHeCompleted(() => heCompleted === 0 ? 0 : task.filter((item) => item.category === 'bhealthusiness' && item.completed).length / healthTask  * 100  )
+    setPersonal( task.filter((item) => item.category === 'personal').length )
+    setPerCompleted(() => personalTask === 0 ? 0 : task.filter((item) => item.category === 'personal' && item.completed).length / personalTask  * 100 )
+    setHobby( task.filter((item) => item.category === 'hobby').length )
+    setHobCompleted(() => hobbyTask === 0 ? 0 : task.filter((item) => item.category === 'personal' && item.completed).length / hobbyTask  * 100 )
+
+  }, [allTask, businessTask, heCompleted, healthTask, hobbyTask, personalTask, task])
 
   const handleClickCate = (e) => {
     const { dataset } = e.currentTarget
@@ -75,18 +108,20 @@ function TodoCategory() {
           <FaArrowRight />
         </button>
         <ul className={styles.categoryList} ref={catesRef}>
-          {CATE_LIST.map((cate) => (
+          {CATE_LIST.map((cate, idx) => (
             <li
               key={`category-${cate.id}`}
               className={cx(styles.category, { [styles.isActive]: cate.category === currentCate })}
             >
               <button className={styles.cateBtn} type='button' data-category={cate.category} onClick={handleClickCate}>
                 <span className={styles.cateTasks}>
-                  {/* 수정 필요 */}
-                  12 tasks
+                  {cate.category === 'all' ? allTask :  taskState[idx] } tasks
                 </span>
                 <span className={styles.cateTitle}>{cate.text}</span>
-                <div className={cx(styles.taskProgress, styles[cate.category])}>{/* 수정 필요 */}</div>
+                <div className={cx(styles.taskProgressWrap, styles[cate.category])}>
+                  <div style={{width: `${taskProgress[idx]}%` }} />
+                </div>
+                <span className={styles.percent}>{taskProgress[idx]}%</span>
               </button>
             </li>
           ))}

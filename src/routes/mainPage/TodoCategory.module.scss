@@ -95,27 +95,48 @@
           margin-bottom: 15px;
         }
 
-        .taskProgress {
+        .taskProgressWrap {
           width: 100%;
           height: 7px;
           border-radius: 10px;
           
           &.all {
-            background-color: rgba(colors.$CATEGORY_ALL, 35%);
+            border: 2px solid rgba(colors.$CATEGORY_ALL, 50%);
           }
           &.business {
-            background-color: rgba(colors.$CATEGORY_BUSINESS, 35%);
+            border: 2px solid rgba(colors.$CATEGORY_BUSINESS, 50%);
           }
           &.health {
-            background-color: rgba(colors.$CATEGORY_PERSONAL, 35%);
+            border: 2px solid rgba(colors.$CATEGORY_PERSONAL, 50%);
           }
           &.personal {
-            background-color: rgba(colors.$CATEGORY_HEALTH, 35%);
+            border: 2px solid rgba(colors.$CATEGORY_HEALTH, 50%);
           }
           &.hobby {
-            background-color: rgba(colors.$CATEGORY_HOBBY, 35%);
+            border: 2px solid rgba(colors.$CATEGORY_HOBBY, 50%);
           }
           
+          .taskProgress.all {
+            background: rgba(colors.$CATEGORY_ALL, 35%);
+          }
+          .taskProgress.business {
+            background: rgba(colors.$CATEGORY_BUSINESS, 35%);
+          }
+          .taskProgress.health {
+            background: rgba(colors.$CATEGORY_PERSONAL, 35%);
+          }
+          .taskProgress.personal {
+            background: rgba(colors.$CATEGORY_HEALTH, 35%);
+          }
+          .taskProgress.hobby {
+            background: rgba(colors.$CATEGORY_HOBBY, 35%);
+          }
+        }
+        .percent {
+          font-size: 10px;
+          font-weight: bold;
+          margin-top: 5px;
+          color: colors.$SUB_TITLE;
         }
       }
     }
