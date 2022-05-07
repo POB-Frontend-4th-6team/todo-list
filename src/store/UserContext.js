@@ -33,14 +33,14 @@ function reducer(state, action) {
 }
 
 function UserContextProvider({ children }) {
-  const [state, dispatch] = useReducer(reducer, initialState, init)
+  const [user, dispatch] = useReducer(reducer, initialState, init)
 
   useEffect(() => {
-    localStorage.setItem('user', JSON.stringify(state))
-  }, [state])
+    localStorage.setItem('user', JSON.stringify(user))
+  }, [user])
 
   // eslint-disable-next-line react/jsx-no-constructed-context-values
-  return <UserContext.Provider value={{ state, dispatch }}>{children}</UserContext.Provider>
+  return <UserContext.Provider value={{ user, dispatch }}>{children}</UserContext.Provider>
 }
 
 export default UserContextProvider
