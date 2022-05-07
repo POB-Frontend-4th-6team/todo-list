@@ -1,5 +1,11 @@
 @use '/src/styles/mixins/position';
 
+.greeting {
+  margin-top: 30px;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
 nav {
   @include position.absolute(auto 100px 100px auto);
   width: 0;
