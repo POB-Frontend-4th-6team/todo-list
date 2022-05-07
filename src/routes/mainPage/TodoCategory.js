@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import styles from './TodoCategory.module.scss'
+import PropTypes from 'prop-types'
 import cx from 'classnames'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 
@@ -33,8 +34,7 @@ const CATE_LIST = [
 
 const TOTAL_SLIDES = 3
 
-function TodoCategory() {
-  const [currentCate, setCate] = useState('all')
+function TodoCategory({ currentCate, setCate }) {
   const [currentIndex, setIndex] = useState(0)
   const catesRef = useRef()
   const handleClickCate = (e) => {
@@ -94,4 +94,10 @@ function TodoCategory() {
     </section>
   )
 }
+
+TodoCategory.propTypes = {
+  currentCate: PropTypes.string,
+  setCate: PropTypes.func,
+}
+
 export default TodoCategory

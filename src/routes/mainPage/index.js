@@ -14,13 +14,15 @@ import Header from '../../components/Header/Header'
 const cx = classNames.bind(buttonStyles)
 
 function MainPage() {
+  const [currentCate, setCate] = useState('all')
+
   return (
     <>
       <Header />
       <div className={styles.mainPage}>
-        <TodoCategory />
+        <TodoCategory setCate={setCate} currentCate={currentCate} />
         <div className={styles.mainPageTodoList}>
-          <TodoList />
+          <TodoList currentCate={currentCate} />
         </div>
         <FloatButton />
       </div>

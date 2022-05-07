@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import Todo from './Todo'
 import styles from './TodoList.module.scss'
+import PropTypes from 'prop-types'
 
 // 더미 데이터
 const Tasks = [
@@ -50,7 +51,7 @@ localStorage.setItem('data', JSON.stringify(Tasks))
 
 const nowDate = new Date().toISOString().slice(0, 10)
 
-function TodoList() {
+function TodoList({ currentCate }) {
   const [taskState, setTaskState] = useState([])
 
   // 마운트시 현재 날짜보다 만료일이 작은 값들만 추출 후 state변경
@@ -63,23 +64,28 @@ function TodoList() {
     setTaskState(data)
   }, [])
 
-  // ChoiceCategory대신 props로 받아온 카테고리값
-  let ChoiceCategory = 'all'
   useEffect(() => {
-    const data = localStorage.getItem('data')
+    let data = localStorage.getItem('data')
+    data = JSON.parse(data)
 
-    if (ChoiceCategory === 'all') setTaskState(JSON.parse(data))
-    else setTaskState((prev) => prev.filter((task) => task.category === ChoiceCategory))
-  }, [ChoiceCategory])
+    if (currentCate === 'all') setTaskState(data)
+    else setTaskState(data.filter((task) => task.category === currentCate))
+  }, [currentCate])
 
   const onClick = useCallback((id, completed) => {
+    // 로컬 따로 state따로 값을 변경해야함
+    let data = localStorage.getItem('data')
+    data = JSON.parse(data)
+    const newList = [...data]
+    const targetIndex = data.findIndex((task) => task.id === Number(id))
+    newList[targetIndex].completed = !completed
+    localStorage.clear()
+    localStorage.setItem('data', JSON.stringify(newList))
+
     setTaskState((prev) => {
       const targetIndex = prev.findIndex((task) => task.id === Number(id))
       const newList = [...prev]
       newList[targetIndex].completed = !completed
-
-      localStorage.clear()
-      localStorage.setItem('data', JSON.stringify(newList))
       return newList
     })
   }, [])
@@ -105,6 +111,10 @@ function TodoList() {
       </ul>
     </div>
   )
+}
+
+TodoList.propTypes = {
+  currentCate: PropTypes.string,
 }
 
 export default TodoList
