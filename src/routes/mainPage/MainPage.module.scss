@@ -1,7 +1,26 @@
 @use '/src/styles/constants/colors';
+@use '/src/styles/mixins/position';
+
+nav {
+  @include position.absolute(auto 100px 100px auto);
+  width: 0;
+  height: 0;
+}
+
+.mainPage {
+  width: 100%;
+  height: 100%;
+}
 
 .mainPageTodoList {
   width: 100%;
   height: 60%;
   margin-top: 250px; // 임시 마진
+}
+
+.circularMenu {
+  position: absolute;
+  width: 66px;
+  height: 66px;
+  transition: all 0.4s ease-out;
 }

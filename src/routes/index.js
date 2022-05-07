@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import styles from './Routes.module.scss'
 
+import styles from './Routes.module.scss'
+import Container from '../components/Container'
 import MainPage from './mainPage'
 import LoginPage from './loginPage'
 import HistoryPage from './historyPage'
 import SettingPage from './settingPage'
-import Container from '../components/Container'
 
 function App() {
   return (

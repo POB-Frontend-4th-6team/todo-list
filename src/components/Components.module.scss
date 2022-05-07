@@ -1,9 +1,11 @@
 @use '/src/styles/constants/colors';
 
 .container {
+  position: relative;
   width: 360px;
   height: 720px;
   padding: 70px 40px;
+  overflow: hidden;
   background-color: colors.$MAIN_BACKGROUND;
   border-radius: 60px;
 }

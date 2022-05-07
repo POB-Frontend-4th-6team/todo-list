@@ -1,0 +1,82 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
+
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding-top: 80px;
+  padding-left: 50px;
+  color: colors.$WHITE;
+  background-color: colors.$SIDE_BACKGROUND;
+  border-radius: 60px;
+}
+
+.topSection {
+  display: flex;
+  width: 200px;
+  height: 100px;
+  margin-bottom: 30px;
+}
+
+.closeButton {
+  @include flexbox.flexbox(center, center);
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  margin-left: auto;
+  border: 2px solid rgba(91, 125, 177, 0.5);
+  border-radius: 50%;
+}
+
+.closeButtonIcon {
+  width: 22px;
+  height: 22px;
+  fill: colors.$WHITE;
+}
+
+.userName {
+  margin-bottom: 40px;
+  font-size: 1.9rem;
+  font-weight: 600;
+  line-height: 50px;
+  letter-spacing: 0.5px;
+}
+
+.menuItems {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 200px;
+  margin-bottom: 40px;
+  // border: 1px solid white;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.menuIcon {
+  width: 22px;
+  height: 22px;
+  margin-right: 20px;
+  color: rgba(91, 125, 177, 0.5);
+}
+
+.menuItemTitle {
+  font-size: 0.9rem;
+  color: rgba(256, 256, 256, 0.8);
+  letter-spacing: 0.5px;
+}
+
+.bottomSection {
+  width: 200px;
+  height: 100px;
+  letter-spacing: 0.5px;
+}
