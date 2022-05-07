@@ -6,20 +6,25 @@ import MainPage from './mainPage'
 import LoginPage from './loginPage'
 import HistoryPage from './historyPage'
 import SettingPage from './settingPage'
+import SideBar from '../components/SideBar/SideBar'
+import SideBarContextProvider from '../store/SideBarContext'
 
 function App() {
   return (
     <Router>
-      <div className={styles.app}>
-        <Container>
-          <Switch>
-            <Route exact path='/' component={MainPage} />
-            <Route exact path='/login' component={LoginPage} />
-            <Route exact path='/history' component={HistoryPage} />
-            <Route exact path='/setting' component={SettingPage} />
-          </Switch>
-        </Container>
-      </div>
+      <SideBarContextProvider>
+        <div className={styles.app}>
+          <SideBar />
+          <Container>
+            <Switch>
+              <Route exact path='/' component={MainPage} />
+              <Route exact path='/login' component={LoginPage} />
+              <Route exact path='/history' component={HistoryPage} />
+              <Route exact path='/setting' component={SettingPage} />
+            </Switch>
+          </Container>
+        </div>
+      </SideBarContextProvider>
     </Router>
   )
 }
