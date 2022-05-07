@@ -1,0 +1,152 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/position';
+
+.inputModal {
+  position: relative;
+  top: -70px;
+  left: -40px;
+  width: 360px;
+  height: 720px;
+  text-align: center;
+  background-color: colors.$WHITE;
+  border-radius: 60px;
+}
+
+.inputWrapper {
+  @include position.absolute(35% auto auto 10%);
+}
+
+.input {
+  width: 280px;
+  height: 50px;
+  padding-left: 2px;
+  overflow: hidden;
+  font-size: 23px;
+  color: colors.$BLACK;
+  caret-color: colors.$BLUE;
+}
+
+.input::placeholder {
+  padding-left: 2px;
+  color: colors.$SUB_TITLE;
+}
+
+.taskvalidMessage {
+  padding-left: 2px;
+  margin-top: 5px;
+  font-size: 14px;
+  color: colors.$BLUE;
+  text-align: left;
+  letter-spacing: -0.075em;
+}
+
+.closeButton {
+  @include position.absolute(50px 30px auto auto);
+  width: 45px;
+  height: 45px;
+  line-height: 50%;
+  border: 3px solid colors.$GRAYD;
+  border-radius: 50%;
+}
+
+.datePickerWrapper {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+}
+
+.datePicker {
+  width: 140px;
+  padding: 8px;
+  background-color: colors.$WHITE;
+  border: 3px solid colors.$GRAYE;
+  border-radius: 60px;
+
+  .expirationDate {
+    width: 100%;
+    font-size: 15px;
+    font-weight: 600;
+    color: colors.$SUB_TITLE;
+  }
+}
+
+.expirationvalidMessage {
+  padding-left: 5px;
+  margin-top: 10px;
+  font-size: 14px;
+  color: colors.$BLUE;
+  letter-spacing: -0.075em;
+}
+
+.categoryWrapper {
+  @include position.absolute(50% 35% auto auto);
+  width: 50px;
+}
+
+.categoryButton {
+  width: 45px;
+  height: 45px;
+  line-height: 50%;
+  background-color: colors.$WHITE;
+  border: 3px solid colors.$GRAYE;
+  border-radius: 50%;
+
+  &.business {
+    color: colors.$CATEGORY_BUSINESS;
+  }
+
+  &.personal {
+    color: colors.$CATEGORY_PERSONAL;
+  }
+
+  &.health {
+    color: colors.$CATEGORY_HEALTH;
+  }
+
+  &.hobby {
+    color: colors.$CATEGORY_HOBBY;
+  }
+}
+
+.categoryDropdown {
+  @include position.absolute(auto);
+  width: 100px;
+  padding: 10px;
+  line-height: 180px;
+  border: 2px solid colors.$GRAYE;
+
+  li {
+    right: 0;
+    width: 100%;
+    height: 40px;
+    margin-top: 1px;
+    line-height: 40px;
+
+    button {
+      width: 100%;
+      font-size: 15px;
+      color: colors.$SUB_TITLE;
+    }
+  }
+}
+
+.newTaskButton {
+  @include position.absolute(auto 30px 50px auto);
+  display: flex;
+  justify-content: space-around;
+  width: 160px;
+  height: 55px;
+  padding: 0 20px;
+  font-size: 15px;
+  line-height: 55px;
+  color: colors.$WHITE;
+  text-align: center;
+  background-color: colors.$BUTTON;
+  border-radius: 40px;
+  box-shadow: colors.$BLUE 0 20px 20px -20px;
+
+  .newTaskArrowUpIcon {
+    height: 55px;
+    line-height: 60px;
+  }
+}
