@@ -3,15 +3,17 @@ import { Link } from 'react-router-dom'
 import styles from './SettingPage.module.scss'
 import Button from './Components/Button'
 import LightSpeed from 'react-reveal/LightSpeed'
+import Shake from 'react-reveal/Shake'
 import avatar from './Components/Avatars/avatar1.png'
 import Header from '../../components/Header/Header'
 import { BsCalendarCheck } from 'react-icons/bs'
 
 function SettingPage() {
-  const [userId, setUserId] = useState('iamchho')
-  const [username, setUsername] = useState('Chiho Lee')
+  const [userId, setUserId] = useState('')
+  const [username, setUsername] = useState('')
   const [changeName, setChangeName] = useState(false)
   const [imageIndex, setImageIndex] = useState(undefined)
+  const [userIndex, setUserIndex] = useState(2)
 
   // useEffect(() => {
   //   localStorage.setItem('user1', JSON.stringify({ userId: 'iamchho', name: 'Chiho Lee', img_idx: 0 }))
@@ -20,7 +22,7 @@ function SettingPage() {
   // }, [])
 
   useEffect(() => {
-    let res = localStorage.getItem('user1')
+    let res = localStorage.getItem(`user${userIndex}`)
     res = JSON.parse(res)
 
     setUserId((prevId) => res.userId)
@@ -37,7 +39,7 @@ function SettingPage() {
   }
 
   const handleSaveUsername = () => {
-    const getData = JSON.parse(localStorage.getItem('user1'))
+    const getData = JSON.parse(localStorage.getItem(`user${userIndex}`))
     getData.name = username
     localStorage.setItem('user1', JSON.stringify(getData))
   }
