@@ -65,7 +65,7 @@ function TodoCategory() {
 
   return (
     <section className={styles.todoCategory}>
-      <h3>Cateogories</h3>
+      <h3>Categories</h3>
       <div className={styles.cateWrap}>
         <button type='button' className={styles.arrowBtn} onClick={handlePrev}>
           <FaArrowLeft />
