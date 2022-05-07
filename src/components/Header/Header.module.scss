@@ -4,4 +4,8 @@
   left: 0;
   display: flex;
   flex-direction: column;
+
+  &:hover {
+    cursor: pointer;
+  }
 }

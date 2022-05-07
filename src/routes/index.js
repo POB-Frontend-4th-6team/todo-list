@@ -14,15 +14,17 @@ function App() {
     <Router>
       <SideBarContextProvider>
         <div className={styles.app}>
-          <SideBar />
-          <Container>
-            <Switch>
-              <Route exact path='/' component={MainPage} />
-              <Route exact path='/login' component={LoginPage} />
-              <Route exact path='/history' component={HistoryPage} />
-              <Route exact path='/setting' component={SettingPage} />
-            </Switch>
-          </Container>
+          <div className={styles.outerContainer}>
+            <SideBar />
+            <Container>
+              <Switch>
+                <Route exact path='/' component={MainPage} />
+                <Route exact path='/login' component={LoginPage} />
+                <Route exact path='/history' component={HistoryPage} />
+                <Route exact path='/setting' component={SettingPage} />
+              </Switch>
+            </Container>
+          </div>
         </div>
       </SideBarContextProvider>
     </Router>
