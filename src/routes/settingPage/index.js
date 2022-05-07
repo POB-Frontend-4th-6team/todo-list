@@ -4,6 +4,7 @@ import styles from './SettingPage.module.scss'
 import Button from './Components/Button'
 import LightSpeed from 'react-reveal/LightSpeed'
 import avatar from './Components/Avatars/avatar1.png'
+import Header from '../../components/Header/Header'
 
 function SettingPage() {
   const [userId, setUserId] = useState('iamchho')
@@ -41,52 +42,53 @@ function SettingPage() {
   }
 
   return (
-    <div className={styles.container}>
-      <LightSpeed right cascade>
-        <div className={styles.settingHeader}>
-          <header>
-            <h1>계정 설정</h1>
-            <p>{username}</p>
-          </header>
-          <div>
+    <>
+      <Header />
+      <div className={styles.container}>
+        <LightSpeed right cascade>
+          <div className={styles.settingHeader}>
+            <header>
+              <h1>Account</h1>
+              <p>{username}</p>
+            </header>
             <img src={avatar} className={styles.profile} />
           </div>
-        </div>
 
-        <div className={styles.settingInfo}>
-          <header>
-            <h1>유저 이름</h1>
-            {changeName ? (
-              <input type='text' placeholder='New Name' value={username} onChange={handleChangeUsername} />
-            ) : (
-              <p>{username}</p>
-            )}
-            <h1 className={styles.usernameHeader}>유저 아이디</h1>
-            <p>{userId}</p>
-          </header>
-          <div>
-            <Button handler={handleChange}>{changeName ? '저장' : '변경'}</Button>
+          <div className={styles.settingInfo}>
+            <header>
+              <h1>Username</h1>
+              {changeName ? (
+                <input type='text' placeholder='name' value={username} onChange={handleChangeUsername} />
+              ) : (
+                <p>{username}</p>
+              )}
+              <h1 className={styles.usernameHeader}>User ID</h1>
+              <p>{userId}</p>
+            </header>
+            <div>
+              <Button handler={handleChange}>{changeName ? 'Save' : 'Change'}</Button>
+            </div>
           </div>
-        </div>
 
-        <div className={styles.settingSave}>
-          <header>
-            <p>
-              안전한 Todo 관리를 위해 <br /> <br />
-              로그아웃을 해주세요.
-            </p>
-            <Link to='/' target='_top'>
-              <Button handler={handleSaveUsername}>저장 후 나가기</Button>
-            </Link>
-          </header>
-          <div>
-            <Link to='/login' target='_top'>
-              <Button>로그아웃</Button>
-            </Link>
+          <div className={styles.settingSave}>
+            <header>
+              <p>
+                For safe use of Todo, <br /> <br />
+                Please log out.
+              </p>
+              <Link to='/' target='_top'>
+                <Button handler={handleSaveUsername}>Save and Exit</Button>
+              </Link>
+            </header>
+            <div>
+              <Link to='/login' target='_top'>
+                <Button>Log out</Button>
+              </Link>
+            </div>
           </div>
-        </div>
-      </LightSpeed>
-    </div>
+        </LightSpeed>
+      </div>
+    </>
   )
 }
 
