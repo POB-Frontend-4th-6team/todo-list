@@ -1,9 +1,9 @@
 import styles from './Button.module.scss'
 import PropTypes from 'prop-types'
 
-function Button({ children, handleChangeName }) {
+function Button({ children, handler }) {
   return (
-    <button type='button' onClick={handleChangeName} className={styles.button}>
+    <button type='button' onClick={handler} className={styles.button}>
       {children}
     </button>
   )
@@ -11,7 +11,7 @@ function Button({ children, handleChangeName }) {
 
 Button.propTypes = {
   children: PropTypes.node,
-  handleChangeName: PropTypes.func,
+  handler: PropTypes.func,
 }
 
 export default Button

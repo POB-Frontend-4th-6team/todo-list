@@ -1,20 +1,43 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import styles from './SettingPage.module.scss'
 import Button from './Components/Button'
 import LightSpeed from 'react-reveal/LightSpeed'
+import avatar from './Components/Avatars/avatar1.png'
 
 function SettingPage() {
   const [userId, setUserId] = useState('iamchho')
   const [username, setUsername] = useState('Chiho Lee')
   const [changeName, setChangeName] = useState(false)
+  const [imageIndex, setImageIndex] = useState(undefined)
+
+  // useEffect(() => {
+  //   localStorage.setItem('user1', JSON.stringify({ userId: 'iamchho', name: 'Chiho Lee', img_idx: 0 }))
+  //   localStorage.setItem('user2', JSON.stringify({ userId: 'songahji', name: 'Songah Park', img_idx: 1 }))
+  //   localStorage.setItem('user3', JSON.stringify({ userId: 'dogmaru', name: 'Maru Jung', img_idx: 2 }))
+  // }, [])
+
+  useEffect(() => {
+    let res = localStorage.getItem('user1')
+    res = JSON.parse(res)
+
+    setUserId((prevId) => res.userId)
+    setUsername((prevUsername) => res.name)
+    setImageIndex((prevIndex) => res.img_idx)
+  }, [])
 
   const handleChange = () => {
-    setChangeName(!changeName)
+    setChangeName((prevBoolean) => !changeName)
   }
 
   const handleChangeUsername = (e) => {
-    setUsername(e.currentTarget.value)
+    setUsername((prev) => e.target.value)
+  }
+
+  const handleSaveUsername = () => {
+    const getData = JSON.parse(localStorage.getItem('user1'))
+    getData.name = username
+    localStorage.setItem('user1', JSON.stringify(getData))
   }
 
   return (
@@ -26,7 +49,7 @@ function SettingPage() {
             <p>{username}</p>
           </header>
           <div>
-            <div className={styles.profile} />
+            <img src={avatar} className={styles.profile} />
           </div>
         </div>
 
@@ -34,7 +57,7 @@ function SettingPage() {
           <header>
             <h1>유저 이름</h1>
             {changeName ? (
-              <input type='text' placeholder='name' value={username} onChange={handleChangeUsername} />
+              <input type='text' placeholder='New Name' value={username} onChange={handleChangeUsername} />
             ) : (
               <p>{username}</p>
             )}
@@ -42,7 +65,7 @@ function SettingPage() {
             <p>{userId}</p>
           </header>
           <div>
-            <Button handleChangeName={handleChange}>{changeName ? '저장' : '변경'}</Button>
+            <Button handler={handleChange}>{changeName ? '저장' : '변경'}</Button>
           </div>
         </div>
 
@@ -53,7 +76,7 @@ function SettingPage() {
               로그아웃을 해주세요.
             </p>
             <Link to='/' target='_top'>
-              <Button>저장 후 나가기</Button>
+              <Button handler={handleSaveUsername}>저장 후 나가기</Button>
             </Link>
           </header>
           <div>
