@@ -9,10 +9,10 @@
   overflow: hidden;
   background-color: colors.$MAIN_BACKGROUND;
   border-radius: 60px;
-  transition: 0.2s ease-in;
+  transition: 0.3s ease-in;
 }
 
 .showSideBar {
-  transition: 0.2s ease-in;
+  transition: 0.3s ease-in;
   transform: translateX(70%) scale(90%);
 }

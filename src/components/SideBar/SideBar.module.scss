@@ -7,14 +7,14 @@
   left: 0;
   display: flex;
   flex-direction: column;
-  width: 600px;
+  width: 100%;
   height: 100%;
   padding-top: 80px;
   padding-left: 50px;
   color: colors.$WHITE;
   background-color: colors.$SIDE_BACKGROUND;
   border-radius: 60px;
-  transition: 0.2s ease-in;
+  transition: 0.3s ease-in;
 }
 
 .showSideBar {

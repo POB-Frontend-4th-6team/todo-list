@@ -1,9 +1,9 @@
 import styles from './SideBar.module.scss'
+import Profile from './Profile'
 import { IoIosArrowBack as CloseButton } from 'react-icons/io'
 import { BsClockHistory as HistoryIcon } from 'react-icons/bs'
 import { FiSettings as SettingsIcon } from 'react-icons/fi'
 import { RiLogoutBoxLine as LogoutIcon } from 'react-icons/ri'
-import Profile from './Profile'
 import { useSideBarStore } from '../../store/SideBarContext'
 import { cx } from '../../styles'
 
