@@ -78,7 +78,7 @@ function FloatButton({ setmodalVisible }) {
 
   const handleEditClick = () => {
     setMenuOpen(false)
-    setmodalVisible({ isEdit: true, isVisible: false })
+    setmodalVisible((prev) => ({ isEdit: !prev.isEdit, isVisible: false }))
   }
 
   useEffect(() => {

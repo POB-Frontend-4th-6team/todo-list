@@ -8,11 +8,16 @@ export const useSideBarStore = () => useContext(SideBarContext)
 
 function SideBarContextProvider({ children }) {
   const [isSideOpen, setIsSideOpen] = useState(false)
+  const [allPercentage, setAllPercentage] = useState(100)
+
+  console.log(allPercentage)
 
   // eslint-disable-next-line react/jsx-no-constructed-context-values
   const value = {
     isSideOpen,
     setIsSideOpen,
+    allPercentage,
+    setAllPercentage,
   }
 
   return <SideBarContext.Provider value={value}>{children}</SideBarContext.Provider>

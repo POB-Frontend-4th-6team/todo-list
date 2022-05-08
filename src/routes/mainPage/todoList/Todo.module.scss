@@ -23,6 +23,10 @@
   }
 }
 
+.edit {
+  background-color: colors.$GRAYD;
+}
+
 .checkBox {
   @include flexbox.flexbox(center, center);
   position: relative;

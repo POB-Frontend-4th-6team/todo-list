@@ -5,12 +5,10 @@ import PropTypes from 'prop-types'
 
 import styles from './Todo.module.scss'
 import { cx } from '../../../styles'
-// import { FaCheckCircle } from 'react-icons/fa'
 
-function Todo({ id, task, category, completed, onClick, deleteTask, onClickEditList, taskObj }) {
+function Todo({ id, task, category, completed, onClick, deleteTask, onClickEditList, taskObj, isEdit }) {
   const handleClick = () => {
     onClick(id, completed)
-    console.log(id)
   }
 
   const handleDeleteIconClick = () => {
@@ -18,7 +16,7 @@ function Todo({ id, task, category, completed, onClick, deleteTask, onClickEditL
   }
 
   return (
-    <li className={styles.todoContainer}>
+    <li className={cx(styles.todoContainer, { [styles.edit]: isEdit })}>
       <div className={styles.checkBox}>
         <button
           className={cx(styles.checkBtn, styles[category], { [styles[`${category}Selected`]]: completed })}
@@ -56,6 +54,7 @@ Todo.propTypes = {
     expiry_date: PropTypes.string,
     complete_data: PropTypes.string,
   }),
+  isEdit: PropTypes.bool,
 }
 
 export default memo(Todo)

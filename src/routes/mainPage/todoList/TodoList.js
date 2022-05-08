@@ -74,10 +74,8 @@ function TodoList({ currentCate, modalVisible, taskState, setTaskState, setmodal
   const onClickEditList = (id) => {
     if (modalVisible.isEdit) {
       setselectedTask(id)
-      console.log('고칠 id ', id)
       setmodalVisible({ isEdit: true, isVisible: true })
     }
-    console.log(modalVisible.isEdit)
   }
 
   return (
@@ -97,6 +95,7 @@ function TodoList({ currentCate, modalVisible, taskState, setTaskState, setmodal
             deleteTask={deleteTask}
             taskObj={Task}
             onClickEditList={onClickEditList}
+            isEdit={modalVisible.isEdit}
           >
             {Task.task}
           </Todo>
