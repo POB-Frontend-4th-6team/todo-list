@@ -5,6 +5,7 @@ import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 
 import styles from './TodoCategory.module.scss'
 import { cx } from '../../../styles'
+import { useSideBarStore } from '../../../store/SideBarContext'
 
 const CATE_LIST = [
   {
@@ -56,6 +57,13 @@ function TodoCategory({ currentCate, setCate, tasks }) {
 
   const taskState = [allTask, businessTask, healthTask, personalTask, hobbyTask]
   const taskProgress = [allCompleted, bsCompleted, heCompleted, perCompleted, hobCompleted]
+
+  const { setAllPercentage } = useSideBarStore()
+  const allPercentage = Math.ceil(allCompleted)
+
+  useEffect(() => {
+    setAllPercentage(allPercentage)
+  }, [allPercentage])
 
   useEffect(() => {
     setTask(Object.keys(task).length)
