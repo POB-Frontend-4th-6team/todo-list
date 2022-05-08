@@ -6,7 +6,7 @@
 .todoContainer {
   @include flexbox.flexbox(0, center);
   flex-direction: row;
-  width: 98%;
+  width: 100%;
   padding: 20px 10px;
   margin-bottom: 7px;
   background-color: colors.$WHITE;
@@ -16,6 +16,10 @@
 
   &:hover {
     transform: scale(1.02);
+
+    .deleteIcon {
+      visibility: visible;
+    }
   }
 }
 
@@ -78,7 +82,7 @@
 .taskMessageBox {
   @include flexbox.flexbox(0, center);
   position: relative;
-  width: 80%;
+  width: 65%;
   padding: 5px 0;
   overflow: hidden;
   font-size: sizes.$TASK_FONT_SIZE;
@@ -98,4 +102,10 @@
       background-color: colors.$TASK_ITEM_TITLE;
     }
   }
+}
+
+.deleteIcon {
+  width: 15%;
+  cursor: pointer;
+  visibility: hidden;
 }

@@ -45,6 +45,13 @@ function TodoList({ currentCate, modalVisible, taskState, setTaskState }) {
     })
   }, [])
 
+  const deleteTask = (id) => {
+    const localStorageTasks = localStorage.getItem('task')
+    const newTasks = JSON.parse(localStorageTasks).filter(task => task.id !== id)
+    localStorage.setItem('task',JSON.stringify(newTasks))
+    setTaskState(newTasks)
+  }
+
   return (
     <div className={styles.todoListContainer}>
       <div className={styles.todoListHeader}>
@@ -59,6 +66,7 @@ function TodoList({ currentCate, modalVisible, taskState, setTaskState }) {
             category={Task.category}
             completed={Task.completed}
             onClick={onClick}
+            deleteTask={deleteTask}
           >
             {Task.task}
           </Todo>

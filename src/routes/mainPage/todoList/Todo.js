@@ -3,10 +3,15 @@ import PropTypes from 'prop-types'
 import { cx } from '../../../styles'
 // import { FaCheckCircle } from 'react-icons/fa'
 import { memo } from 'react'
+import {BsTrash} from 'react-icons/bs'
 
-function Todo({ id, task, category, completed, onClick }) {
+function Todo({ id, task, category, completed, onClick, deleteTask }) {
   const handleClick = () => {
     onClick(id, completed)
+  }
+
+  const handleDeleteIconClick = () => {
+    deleteTask(id)
   }
 
   return (
@@ -27,6 +32,7 @@ function Todo({ id, task, category, completed, onClick }) {
           {completed && <div className={styles.taskMessageLine} />}
         </div>
       </div>
+      <BsTrash className={styles.deleteIcon} onClick={handleDeleteIconClick} />
     </li>
   )
 }
@@ -37,6 +43,7 @@ Todo.propTypes = {
   category: PropTypes.string,
   completed: PropTypes.bool,
   onClick: PropTypes.func,
+  deleteTask: PropTypes.func
 }
 
 export default memo(Todo)
