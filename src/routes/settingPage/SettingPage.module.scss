@@ -1,5 +1,9 @@
 @use '../../styles/constants/colors';
 
+$HISTORY_COLOR: green;
+$HISTORY_HOVER: #32cd32;
+$HISTORY_ACTIVE: darkgreen;
+
 @mixin flexFullWidth {
   display: flex;
   width: 100%;
@@ -56,11 +60,17 @@
 }
 
 .profile {
+  display: inline-block;
   width: 100px;
   height: 100px;
   margin: auto;
-  background: colors.$GRAYD;
   border-radius: 50%;
+  transition: all 0.3s;
+
+  &:hover {
+    width: 110px;
+    height: 110px;
+  }
 }
 
 .settingInfo {
@@ -91,6 +101,21 @@
     }
   }
 
+  h2 {
+    width: 200px;
+    margin-top: 40px;
+    color: $HISTORY_COLOR;
+    cursor: pointer;
+
+    &:hover {
+      color: $HISTORY_HOVER;
+    }
+
+    &:active {
+      color: $HISTORY_ACTIVE;
+    }
+  }
+
   div {
     @include buttonStyle;
 
@@ -109,6 +134,10 @@
   }
 }
 
+.calendarIcon {
+  margin-right: 8px;
+}
+
 .usernameHeader {
   margin-top: 20px;
 }
@@ -123,6 +152,10 @@
     p {
       font-size: 1rem;
       color: colors.$TASK_ITEM_TITLE;
+
+      span {
+        color: colors.$CATEGORY_PERSONAL;
+      }
     }
 
     button {
