@@ -3,23 +3,29 @@ import { useEffect, useState } from 'react'
 import { BsTrash, BsCircle } from 'react-icons/bs'
 
 import styles from './HistoryPage.module.scss'
-import { cx } from '../../styles'
+import cx from 'classnames'
+import PropTypes from 'prop-types'
 
 const TASKS_KEY = 'task'
 
-function FinishedTasks() {
-  const [finishedTasks, setFinishedTasks] = useState([])
+function FinishedTasks({value}) {
   const [isEmpty, setIsEmpty] = useState(false)
+  // localStorage.setItem(TASKS_KEY, JSON.stringify(FINISHED_TODO_LIST))
+  const year = value.getFullYear()
+  const month = value.getMonth() + 1
+  const day = value.getDate()
+  const date = `${year}-${month >= 10 ? month : `0${month}`}-${day >= 10 ? day : `0${day}`}`
+
+  const [finishedTasks, setFinishedTasks] = useState([])
 
   const getTasks = () => {
     const localStorageTasks = localStorage.getItem(TASKS_KEY)
-    if (localStorageTasks) {
-      const localStorageTasksFinished = JSON.parse(localStorageTasks).filter((task) => task.completed)
+    if(localStorageTasks){
+      const localStorageTasksFinished = JSON.parse(localStorageTasks).filter(task=>task.completed_date === date)
       setFinishedTasks(localStorageTasksFinished)
-    } else {
-      setFinishedTasks([])
     }
   }
+
   const deleteTask = (id) => {
     const localStorageTasks = localStorage.getItem(TASKS_KEY)
     const newTasks = JSON.parse(localStorageTasks).filter((task) => task.id !== id)
@@ -34,9 +40,10 @@ function FinishedTasks() {
     !finishedTasks.length ? setIsEmpty(true) : setIsEmpty(false)
   }, [finishedTasks])
 
-  useEffect(() => {
+  useEffect(()=>{
     getTasks()
-  }, [])
+    // console.log(date, JSON.parse(localStorage.getItem(TASKS_KEY)).filter(task=>task.completed_date === date))
+  },[ date ])
   return (
     <ul className={styles.tasks}>
       {finishedTasks.map((task) => (
@@ -51,6 +58,9 @@ function FinishedTasks() {
       {isEmpty ? <p className={styles.emptyMsg}>EMPTY</p> : null}
     </ul>
   )
+}
+FinishedTasks.propTypes = {
+  value: PropTypes.objectOf(PropTypes.string),
 }
 
 export default FinishedTasks

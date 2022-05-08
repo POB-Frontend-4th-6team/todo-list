@@ -9,6 +9,7 @@ import { cx } from '../../../styles'
 function Todo({ id, task, category, completed, onClick, deleteTask, onClickEditList, taskObj, isEdit }) {
   const handleClick = () => {
     onClick(id, completed)
+    console.log(id)
   }
 
   const handleDeleteIconClick = () => {

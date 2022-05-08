@@ -31,11 +31,28 @@ function TodoList({ currentCate, modalVisible, taskState, setTaskState, setmodal
 
   const onClick = useCallback((id, completed) => {
     // 로컬 따로 state따로 값을 변경해야함
+    const date = new Date()
+    const year = date.getFullYear()
+    let month = date.getMonth() + 1
+    let day = date.getDate()
+    if(String(day).length === 1){
+      day = `0${ day}` 
+    }
+    if(String(month).length === 1){
+      month = `0${ month}` 
+    }
+
+  
     let data = localStorage.getItem('task')
     data = JSON.parse(data)
     const newList = [...data]
     const targetIndex = data.findIndex((task) => task.id === Number(id))
     newList[targetIndex].completed = !completed
+    if(newList[targetIndex].completed){
+      newList[targetIndex].completed_date = `${year}-${month}-${day}`
+    } else {
+      newList[targetIndex].completed_date = null
+    }
     localStorage.removeItem('task')
     localStorage.setItem('task', JSON.stringify(newList))
 
