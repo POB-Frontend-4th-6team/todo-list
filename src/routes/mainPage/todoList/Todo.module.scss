@@ -38,11 +38,11 @@
     }
 
     &.personal {
-      border: 2px solid colors.$CATEGORY_HEALTH;
+      border: 2px solid colors.$CATEGORY_PERSONAL;
     }
 
     &.health {
-      border: 2px solid colors.$CATEGORY_PERSONAL;
+      border: 2px solid colors.$CATEGORY_HEALTH;
     }
 
     &.hobby {

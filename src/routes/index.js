@@ -8,25 +8,28 @@ import HistoryPage from './historyPage'
 import SettingPage from './settingPage'
 import SideBar from '../components/SideBar/SideBar'
 import SideBarContextProvider from '../store/SideBarContext'
+import UserContextProvider from '../store/UserContext'
 
 function App() {
   return (
     <Router>
-      <SideBarContextProvider>
-        <div className={styles.app}>
-          <div className={styles.outerContainer}>
-            <SideBar />
-            <Container>
-              <Switch>
-                <Route exact path='/' component={MainPage} />
-                <Route exact path='/login' component={LoginPage} />
-                <Route exact path='/history' component={HistoryPage} />
-                <Route exact path='/setting' component={SettingPage} />
-              </Switch>
-            </Container>
+      <UserContextProvider>
+        <SideBarContextProvider>
+          <div className={styles.app}>
+            <div className={styles.outerContainer}>
+              <SideBar />
+              <Container>
+                <Switch>
+                  <Route exact path='/' component={MainPage} />
+                  <Route exact path='/login' component={LoginPage} />
+                  <Route exact path='/history' component={HistoryPage} />
+                  <Route exact path='/setting' component={SettingPage} />
+                </Switch>
+              </Container>
+            </div>
           </div>
-        </div>
-      </SideBarContextProvider>
+        </SideBarContextProvider>
+      </UserContextProvider>
     </Router>
   )
 }

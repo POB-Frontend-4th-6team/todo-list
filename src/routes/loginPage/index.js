@@ -3,11 +3,14 @@ import { useHistory } from 'react-router-dom'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
 
 import styles from './LoginPage.module.scss'
+import { useUserStore } from '../../store/UserContext'
 
 function LoginPage() {
   const [ID, setID] = useState('')
   const [password, setPassword] = useState('')
   const [isPasswordView, setIsPasswordView] = useState(false)
+
+  const { dispatch } = useUserStore()
 
   const passwordViewIcon = isPasswordView ? (
     <FaRegEye className={styles.passwordIcon} />
@@ -28,9 +31,9 @@ function LoginPage() {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    // TODO: 로그인을 위한 코드
+    dispatch({ type: 'CHAMGE_USER', id: ID, name: ID })
 
-    history.push('/')
+    history.replace('/')
     window.location.reload()
   }
 
