@@ -67,6 +67,8 @@ function InputModal({ isVisible, handleModalVisible }) {
 
   const handleModalClose = () => {
     handleModalVisible(false)
+    setShowDropdown(false)
+    setSelectedCategory('business')
   }
 
   return (
@@ -98,7 +100,10 @@ function InputModal({ isVisible, handleModalVisible }) {
       </div>
       <div className={styles.categoryWrapper}>
         <button type='button' className={cx(styles.categoryButton, styles[selectedCategory])} onClick={toggleDropdown}>
-          <IoMdRadioButtonOn size='25' />
+          <span>
+            <IoMdRadioButtonOn size='25' />
+          </span>
+          <p>{selectedCategory.toUpperCase()}</p>
         </button>
         {showDropdown && (
           <ul className={styles.categoryDropdown}>
