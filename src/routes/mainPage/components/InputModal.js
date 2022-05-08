@@ -68,6 +68,7 @@ function InputModal({ isVisible, handleModalVisible }) {
   const handleModalClose = () => {
     handleModalVisible(false)
     setShowDropdown(false)
+    setSelectedCategory('business')
   }
 
   return (
