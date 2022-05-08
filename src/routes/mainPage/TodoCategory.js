@@ -34,16 +34,8 @@ const CATE_LIST = [
 
 const TOTAL_SLIDES = 3
 
-
-<<<<<<< HEAD
-function TodoCategory() {
-  const [currentCate, setCate] = useState('all')
-  const [currentIndex, setIndex] = useState(0)
-
-=======
 function TodoCategory({ currentCate, setCate }) {
   const [currentIndex, setIndex] = useState(0)
->>>>>>> upstream/develop
   const [allTask, setTask] = useState(0)
   const [businessTask, setBusiness] = useState(0)
   const [healthTask, setHealth] = useState(0)
