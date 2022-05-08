@@ -3,22 +3,19 @@ import styles from './HistoryPage.module.scss'
 import cx from 'classnames'
 import {BsTrash, BsCircle} from 'react-icons/bs'
 
-const FINISHED_TODO_LIST = [
-  {id:0, task:'abcaaaaaaaaaaaaaaaaaa', category: 'business', completed: true, expiry_date: 1230412304, completed_date: '2022-05-05'},
-  {id:1, task:'abcd', category: 'personal', completed: true, expiry_date: 1230412304, completed_date: '2022-05-04'},
-  {id:2, task:'abce', category: 'health', completed: true, expiry_date: 1230412304, completed_date: '2022-05-03'},
-  {id:3, task:'abcf', category: 'hobby', completed: true, expiry_date: 1230412304, completed_date: '2022-05-02'},
-  {id:4, task:'abcg', category: 'abcd', completed: true, expiry_date: 1230412304, completed_date: '2022-05-01'},
-  ]
-const TASKS_KEY = 'TASK'
+const TASKS_KEY = 'task'
 
 function FinishedTasks() {
-  const [finishedTasks, setFinishedTasks] = useState(FINISHED_TODO_LIST)
+  const [finishedTasks, setFinishedTasks] = useState([])
+  const [isEmpty, setIsEmpty] = useState(false)
+
   const getTasks = () => {
     const localStorageTasks = localStorage.getItem(TASKS_KEY)
     if(localStorageTasks){
       const localStorageTasksFinished = JSON.parse(localStorageTasks).filter(task=>task.completed)
       setFinishedTasks(localStorageTasksFinished)
+    }else{
+      setFinishedTasks([])
     }
   }
   const deleteTask = (id) => {
@@ -31,21 +28,10 @@ function FinishedTasks() {
     const {id} = e.currentTarget.dataset
     deleteTask(Number(id))
   }
+  useEffect(()=>{
+    !finishedTasks.length?setIsEmpty(true):setIsEmpty(false)
+  },[finishedTasks])
 
-  const findCategoryClassname = (category) => {
-    switch(category){
-      case 'business':
-        return styles.business
-      case 'personal':
-        return styles.personal
-      case 'health':
-        return styles.health
-      case 'hobby':
-        return styles.hobby
-      default:
-        return styles.all
-    }
-  }
   useEffect(()=>{
     getTasks()
   },[])
@@ -54,7 +40,7 @@ function FinishedTasks() {
       {finishedTasks.map(task=>(
         <li key={`task-key-${task.id}`} className={styles.task}  >
           <div className={styles.leftAlign} >
-            <BsCircle className = {cx(styles.categoryIcon,findCategoryClassname(task.category))}/>
+            <BsCircle className = {cx(styles.categoryIcon, styles[task.category])}/>
             <p className={styles.title}>
               {task.task}
             </p>
@@ -62,6 +48,7 @@ function FinishedTasks() {
           </div>
         </li>
         ))}
+      {isEmpty?<p className={styles.emptyMsg}>EMPTY</p>:null}
     </ul> 
   )
 }
