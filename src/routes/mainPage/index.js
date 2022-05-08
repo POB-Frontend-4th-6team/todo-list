@@ -3,23 +3,31 @@ import { cx } from '../../styles/index'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { MdModeEditOutline } from 'react-icons/md'
 import { CgEditBlackPoint } from 'react-icons/cg'
+
 import PropTypes from 'prop-types'
-import TodoCategory from './TodoCategory'
 import styles from './MainPage.module.scss'
 import buttonStyles from './components/RoundButton.module.scss'
 import RoundButton from './components/RoundButton'
+import TodoList from './todoList/TodoList'
+import TodoCategory from './TodoCategory'
 import Header from '../../components/Header/Header'
 import InputModal from './components/InputModal'
 
 function MainPage() {
+  const [currentCate, setCate] = useState('all')
   const [modalVisible, setmodalVisible] = useState(false)
+
   return (
     <>
       <Header />
-      <p className={styles.greeting}>안녕하세요 JOY 님.</p>
-      <TodoCategory />
-      <FloatButton handleOpenAddModal={setmodalVisible} />
-      <InputModal isVisible={modalVisible} handleModalVisible={setmodalVisible} />
+      <div className={styles.mainPage}>
+        <TodoCategory setCate={setCate} currentCate={currentCate} />
+        <div className={styles.mainPageTodoList}>
+          <TodoList currentCate={currentCate} />
+        </div>
+        <FloatButton handleOpenAddModal={setmodalVisible} />
+        <InputModal isVisible={modalVisible} handleModalVisible={setmodalVisible} />
+      </div>
     </>
   )
 }
