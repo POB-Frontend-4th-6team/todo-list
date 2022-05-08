@@ -3,24 +3,31 @@ import { cx } from '../../styles/index'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { MdModeEditOutline } from 'react-icons/md'
 import { CgEditBlackPoint } from 'react-icons/cg'
+
 import PropTypes from 'prop-types'
-import TodoCategory from './TodoCategory'
 import styles from './MainPage.module.scss'
 import buttonStyles from './components/RoundButton.module.scss'
 import RoundButton from './components/RoundButton'
+import TodoList from './todoList/TodoList'
+import TodoCategory from './TodoCategory'
 import Header from '../../components/Header/Header'
 import InputModal from './components/InputModal'
 
-
 function MainPage() {
+  const [currentCate, setCate] = useState('all')
   const [modalVisible, setmodalVisible] = useState(false)
+
   return (
     <>
       <Header />
-      <p className={styles.greeting}>안녕하세요 JOY 님.</p>
-      <TodoCategory />
-      <FloatButton handleOpenAddModal={setmodalVisible} />
-      <InputModal isVisible={modalVisible} handleModalVisible={setmodalVisible} />
+      <div className={styles.mainPage}>
+        <TodoCategory setCate={setCate} currentCate={currentCate} />
+        <div className={styles.mainPageTodoList}>
+          <TodoList currentCate={currentCate} />
+        </div>
+        <FloatButton handleOpenAddModal={setmodalVisible} />
+        <InputModal isVisible={modalVisible} handleModalVisible={setmodalVisible} />
+      </div>
     </>
   )
 }
@@ -57,35 +64,35 @@ function FloatButton({ handleOpenAddModal }) {
 
   return (
     <nav ref={buttonMenuRef}>
-    <span className={styles.circularMenu}>
+      <span className={styles.circularMenu}>
+        <RoundButton
+          onClick={handleAddClick}
+          className={cx({ [buttonStyles.addButtonOpen]: menuOpen }, { [buttonStyles.hideButton]: !menuOpen })}
+          aria-label='Add button'
+        >
+          <AiOutlinePlus size='2em' />
+        </RoundButton>
+        <RoundButton
+          onClick={handleEditClick}
+          className={cx({ [buttonStyles.editButtonOpen]: menuOpen }, { [buttonStyles.hideButton]: !menuOpen })}
+          aria-label='Edit button'
+        >
+          <MdModeEditOutline size='1.3em' />
+        </RoundButton>
+      </span>
       <RoundButton
-        onClick={handleAddClick}
-        className={cx({ [buttonStyles.addButtonOpen]: menuOpen }, { [buttonStyles.hideButton]: !menuOpen })}
-        aria-label='Add button'
+        onClick={handleOpenClick}
+        className={cx(buttonStyles.openMenuButton, { [buttonStyles.bump]: menuOpen })}
+        aria-label='Open button'
       >
-        <AiOutlinePlus size='2em' />
+        <CgEditBlackPoint size='1.5em' />
       </RoundButton>
-      <RoundButton
-        onClick={handleEditClick}
-        className={cx({ [buttonStyles.editButtonOpen]: menuOpen }, { [buttonStyles.hideButton]: !menuOpen })}
-        aria-label='Edit button'
-      >
-        <MdModeEditOutline size='1.3em' />
-      </RoundButton>
-    </span>
-    <RoundButton
-      onClick={handleOpenClick}
-      className={cx(buttonStyles.openMenuButton, { [buttonStyles.bump]: menuOpen })}
-      aria-label='Open button'
-    >
-      <CgEditBlackPoint size='1.5em' />
-    </RoundButton>
-  </nav>
-)
+    </nav>
+  )
 }
 
 FloatButton.propTypes = {
-handleOpenAddModal: PropTypes.func,
+  handleOpenAddModal: PropTypes.func,
 }
 
 export default MainPage
