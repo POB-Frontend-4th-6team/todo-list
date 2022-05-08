@@ -118,9 +118,9 @@ function TodoCategory() {
                 </span>
                 <span className={styles.cateTitle}>{cate.text}</span>
                 <div className={cx(styles.taskProgressWrap, styles[cate.category])}>
-                  <div style={{width: `${taskProgress[idx]}%` }} />
+                  <div className={styles.taskProgress} style={{width: `${Math.ceil(taskProgress[idx])}%` }} />
                 </div>
-                <span className={styles.percent}>{taskProgress[idx]}%</span>
+                <span className={styles.percent}>{Math.ceil(taskProgress[idx])}%</span>
               </button>
             </li>
           ))}
