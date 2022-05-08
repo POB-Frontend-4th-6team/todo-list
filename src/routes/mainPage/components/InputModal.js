@@ -22,6 +22,11 @@ function InputModal({ isVisible, handleModalVisible }) {
     setExpirationDate(e.currentTarget.value)
   }
 
+  const getLastId = (taskArr) => {
+    const lastTask = taskArr[taskArr.length-1]
+    if(!lastTask)return 0
+    return lastTask.id +1
+  }
   const handleSetTask = () => {
     if (!taskTitle) {
       setTaskvalid(true)
@@ -30,7 +35,7 @@ function InputModal({ isVisible, handleModalVisible }) {
     } else {
       const getTask = localStorage.getItem('task')
       const getTaskArr = JSON.parse(getTask)
-      const taskId = getTaskArr ? getTaskArr.length + 1 : 1
+      const taskId = getLastId(getTaskArr)+1
       const taskObj = {
         id: taskId,
         task: taskTitle,
