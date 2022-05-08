@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 
 import PropTypes from 'prop-types'
 import { AiOutlinePlus } from 'react-icons/ai'
-// import { MdModeEditOutline } from 'react-icons/md'
 import { CgEditBlackPoint } from 'react-icons/cg'
 
 import styles from './MainPage.module.scss'
@@ -59,10 +58,6 @@ function FloatButton({ handleOpenAddModal }) {
     handleOpenAddModal(true)
   }
 
-  // const handleEditClick = () => {
-  //   setMenuOpen((prev) => !prev)
-  // }
-
   useEffect(() => {
     function handleClickOutside(event) {
       if (buttonMenuRef.current && !buttonMenuRef.current.contains(event.target)) {
@@ -86,13 +81,6 @@ function FloatButton({ handleOpenAddModal }) {
         >
           <AiOutlinePlus size='2em' />
         </RoundButton>
-        {/* <RoundButton
-          onClick={handleEditClick}
-          className={cx({ [buttonStyles.editButtonOpen]: menuOpen }, { [buttonStyles.hideButton]: !menuOpen })}
-          aria-label='Edit button'
-        >
-          <MdModeEditOutline size='1.3em' />
-        </RoundButton> */}
       </span>
       <RoundButton
         onClick={handleOpenClick}

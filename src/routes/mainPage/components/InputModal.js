@@ -67,6 +67,10 @@ function InputModal({ isVisible, handleModalVisible }) {
     setShowDropdown((prev) => !prev)
   }
 
+  const preventKeyboard = (e) => {
+    e.preventDefault()
+  }
+
   const handleSelectedCategory = (e) => {
     setSelectedCategory(e.currentTarget.dataset.category)
     setShowDropdown((prev) => !prev)
@@ -101,6 +105,7 @@ function InputModal({ isVisible, handleModalVisible }) {
             value={expirationDate}
             onChange={handleGetValue}
             min={today}
+            onKeyDown={preventKeyboard}
           />
         </button>
         {expirationvalid && <div className={styles.expirationvalidMessage}>만료일을 설정해주세요.</div>}
