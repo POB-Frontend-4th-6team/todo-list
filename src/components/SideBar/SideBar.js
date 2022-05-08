@@ -7,7 +7,7 @@ import { RiLogoutBoxLine as LogoutIcon } from 'react-icons/ri'
 import { useSideBarStore } from '../../store/SideBarContext'
 import { cx } from '../../styles'
 import { useUserStore } from '../../store/UserContext'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 
 function SideBar() {
   const { isSideOpen, setIsSideOpen } = useSideBarStore()
@@ -42,15 +42,25 @@ function SideBar() {
       <ul className={styles.menuItems}>
         <li className={styles.menuItem}>
           <HistoryIcon className={styles.menuIcon} />
-          <span className={styles.menuItemTitle}>History</span>
+          <Link to='/history'>
+            <button type='button' className={styles.menuItemTitle} onClick={toggleSideBar}>
+              History
+            </button>
+          </Link>
         </li>
         <li className={styles.menuItem}>
           <SettingsIcon className={styles.menuIcon} />
-          <span className={styles.menuItemTitle}>Settings</span>
+          <Link to='/setting'>
+            <button type='button' className={styles.menuItemTitle} onClick={toggleSideBar}>
+              Settings
+            </button>
+          </Link>
         </li>
         <li className={styles.menuItem} onClick={handleLogout} role='presentation'>
           <LogoutIcon className={styles.menuIcon} />
-          <span className={styles.menuItemTitle}>Logout</span>
+          <button type='button' className={styles.menuItemTitle}>
+            Logout
+          </button>
         </li>
       </ul>
       <section className={styles.bottomSection}>Consistency</section>
