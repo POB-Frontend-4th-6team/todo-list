@@ -6,9 +6,9 @@ import MainPage from './mainPage'
 import LoginPage from './loginPage'
 import HistoryPage from './historyPage'
 import SettingPage from './settingPage'
-import SideBar from '../components/SideBar/SideBar'
 import SideBarContextProvider from '../store/SideBarContext'
 import UserContextProvider from '../store/UserContext'
+import SideBar from '../components/SideBar/SideBar'
 
 function App() {
   return (
