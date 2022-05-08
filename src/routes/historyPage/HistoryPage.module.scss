@@ -60,35 +60,43 @@
         height: 20px;
         margin-left: 10px;
 
-        .business {
+        &.business {
           color: colors.$CATEGORY_BUSINESS;
         }
 
-        .personal {
+        &.personal {
           color: colors.$CATEGORY_PERSONAL;
         }
 
-        .health {
+        &.health {
           color: colors.$CATEGORY_HEALTH;
         }
 
-        .hobby {
+        &.hobby {
           color: colors.$CATEGORY_HOBBY;
         }
 
-        .all {
+        &.all {
           color: colors.$CATEGORY_ALL;
         }
       }
 
       .deleteIcon {
-        display: none;
+        margin-right: 10px;
         cursor: pointer;
+        opacity: 0;
       }
 
       &:hover .deleteIcon {
-        display: block;
+        opacity: 1;
       }
+    }
+
+    .emptyMsg {
+      width: 100%;
+      margin-top: 20px;
+      color: colors.$GRAYD;
+      text-align: center;
     }
   }
 }

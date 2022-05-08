@@ -5,6 +5,7 @@ import { MdModeEditOutline } from 'react-icons/md'
 import { CgEditBlackPoint } from 'react-icons/cg'
 
 import PropTypes from 'prop-types'
+
 import styles from './MainPage.module.scss'
 import buttonStyles from './components/RoundButton.module.scss'
 import RoundButton from './components/RoundButton'
@@ -12,18 +13,31 @@ import TodoList from './todoList/TodoList'
 import TodoCategory from './TodoCategory'
 import Header from '../../components/Header/Header'
 import InputModal from './components/InputModal'
+import { useUserStore } from '../../store/UserContext'
 
 function MainPage() {
   const [currentCate, setCate] = useState('all')
   const [modalVisible, setmodalVisible] = useState(false)
+  const [taskState, setTaskState] = useState([])
+
+  const { user } = useUserStore()
 
   return (
     <>
       <Header />
       <div className={styles.mainPage}>
-        <TodoCategory setCate={setCate} currentCate={currentCate} />
+        <header className={styles.greeting}>
+          What&apos;s up,
+          <span> {user.name}</span>
+        </header>
+        <TodoCategory setCate={setCate} currentCate={currentCate} tasks={taskState} />
         <div className={styles.mainPageTodoList}>
-          <TodoList currentCate={currentCate} />
+          <TodoList
+            currentCate={currentCate}
+            modalVisible={modalVisible}
+            taskState={taskState}
+            setTaskState={setTaskState}
+          />
         </div>
         <FloatButton handleOpenAddModal={setmodalVisible} />
         <InputModal isVisible={modalVisible} handleModalVisible={setmodalVisible} />

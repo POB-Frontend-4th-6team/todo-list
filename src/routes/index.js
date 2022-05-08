@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 import styles from './Routes.module.scss'
 import Container from '../components/Container'
@@ -7,7 +7,7 @@ import LoginPage from './loginPage'
 import HistoryPage from './historyPage'
 import SettingPage from './settingPage'
 import SideBarContextProvider from '../store/SideBarContext'
-import UserContextProvider from '../store/UserContext'
+import UserContextProvider, { useUserStore } from '../store/UserContext'
 import SideBar from '../components/SideBar/SideBar'
 
 function App() {
@@ -20,8 +20,15 @@ function App() {
               <SideBar />
               <Container>
                 <Switch>
-                  <Route exact path='/' component={MainPage} />
+                  <Route exact path='/'>
+                    {localStorage.getItem('user') == null || JSON.parse(localStorage.getItem('user')).id === '' ? (
+                      <Redirect exact to='/login' />
+                    ) : (
+                      <Redirect exact to='/main' />
+                    )}
+                  </Route>
                   <Route exact path='/login' component={LoginPage} />
+                  <Route exact path='/main' component={MainPage} />
                   <Route exact path='/history' component={HistoryPage} />
                   <Route exact path='/setting' component={SettingPage} />
                 </Switch>
