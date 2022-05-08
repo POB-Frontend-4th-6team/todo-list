@@ -20,8 +20,8 @@ function FinishedTasks() {
   }
   const deleteTask = (id) => {
     const localStorageTasks = localStorage.getItem(TASKS_KEY)
-    const newTask = JSON.parse(localStorageTasks).filter(task => task.id !== id)
-    localStorage.setItem(TASKS_KEY,JSON.stringify(newTask))
+    const newTasks = JSON.parse(localStorageTasks).filter(task => task.id !== id)
+    localStorage.setItem(TASKS_KEY,JSON.stringify(newTasks))
     getTasks()
   }
   const handleDeleteBtnClick = (e) => {
