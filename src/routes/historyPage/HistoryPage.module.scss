@@ -82,12 +82,13 @@
       }
 
       .deleteIcon {
-        display: none;
+        margin-right: 10px;
         cursor: pointer;
+        opacity: 0;
       }
 
       &:hover .deleteIcon {
-        display: block;
+        opacity: 1;
       }
     }
   }
