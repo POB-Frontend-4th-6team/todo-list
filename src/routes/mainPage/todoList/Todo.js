@@ -1,8 +1,9 @@
-import styles from './Todo.module.scss'
-import PropTypes from 'prop-types'
-import { cx } from '../../../styles'
-// import { FaCheckCircle } from 'react-icons/fa'
 import { memo } from 'react'
+
+import PropTypes from 'prop-types'
+
+import styles from './Todo.module.scss'
+import { cx } from '../../../styles'
 
 function Todo({ id, task, category, completed, onClick }) {
   const handleClick = () => {
@@ -18,9 +19,7 @@ function Todo({ id, task, category, completed, onClick }) {
           type='button'
           onClick={handleClick}
         />
-        {/* {completed && <FaCheckCircle onClick={handleClick} />} */}
       </div>
-      {/* <div className={cx(styles.taskMessage, { [styles.taskMessageCompleted]: completed })}>{task}</div> */}
       <div className={styles.taskMessageBox}>
         <div className={styles.taskMessage}>
           {task}

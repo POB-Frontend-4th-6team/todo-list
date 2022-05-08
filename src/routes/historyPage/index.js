@@ -1,6 +1,6 @@
+import styles from './HistoryPage.module.scss'
 import Header from '../../components/Header/Header'
 import FinishedTasks from './FinishedTasks'
-import styles from './HistoryPage.module.scss'
 
 function HistoryPage() {
   return (

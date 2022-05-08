@@ -1,9 +1,11 @@
 import { useState } from 'react'
-import styles from './InputModal.module.scss'
+
+import PropTypes from 'prop-types'
 import { FiX, FiChevronUp } from 'react-icons/fi'
 import { IoMdRadioButtonOn } from 'react-icons/io'
+
+import styles from './InputModal.module.scss'
 import { cx } from '../../../styles'
-import PropTypes from 'prop-types'
 
 const CATEGORY = ['business', 'personal', 'health', 'hobby']
 const today = new Date().toISOString().split('T')[0]

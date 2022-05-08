@@ -1,14 +1,14 @@
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 import styles from './Routes.module.scss'
+import SideBar from '../components/SideBar/SideBar'
 import Container from '../components/Container'
 import MainPage from './mainPage'
 import LoginPage from './loginPage'
 import HistoryPage from './historyPage'
 import SettingPage from './settingPage'
 import SideBarContextProvider from '../store/SideBarContext'
-import UserContextProvider, { useUserStore } from '../store/UserContext'
-import SideBar from '../components/SideBar/SideBar'
+import UserContextProvider from '../store/UserContext'
 
 function App() {
   return (

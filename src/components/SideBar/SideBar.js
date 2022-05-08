@@ -1,14 +1,15 @@
-import styles from './SideBar.module.scss'
-import Profile from './Profile'
+import { useHistory, Link } from 'react-router-dom'
 import { IoIosArrowBack as CloseButton } from 'react-icons/io'
 import { BsClockHistory as HistoryIcon } from 'react-icons/bs'
 import { FiSettings as SettingsIcon } from 'react-icons/fi'
 import { RiLogoutBoxLine as LogoutIcon } from 'react-icons/ri'
 import { CgMenuGridO as OverviewIcon } from 'react-icons/cg'
-import { useSideBarStore } from '../../store/SideBarContext'
+
+import styles from './SideBar.module.scss'
 import { cx } from '../../styles'
+import Profile from './Profile'
+import { useSideBarStore } from '../../store/SideBarContext'
 import { useUserStore } from '../../store/UserContext'
-import { useHistory, Link } from 'react-router-dom'
 
 function SideBar() {
   const { isSideOpen, setIsSideOpen } = useSideBarStore()

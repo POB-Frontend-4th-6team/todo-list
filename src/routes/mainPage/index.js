@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
-import { cx } from '../../styles/index'
+
+import PropTypes from 'prop-types'
 import { AiOutlinePlus } from 'react-icons/ai'
 // import { MdModeEditOutline } from 'react-icons/md'
 import { CgEditBlackPoint } from 'react-icons/cg'
 
-import PropTypes from 'prop-types'
-
 import styles from './MainPage.module.scss'
+import { cx } from '../../styles/index'
 import buttonStyles from './components/RoundButton.module.scss'
 import RoundButton from './components/RoundButton'
 import TodoList from './todoList/TodoList'

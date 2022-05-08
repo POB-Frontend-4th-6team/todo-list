@@ -1,7 +1,9 @@
 import { useCallback, useEffect } from 'react'
-import Todo from './Todo'
-import styles from './TodoList.module.scss'
+
 import PropTypes from 'prop-types'
+
+import styles from './TodoList.module.scss'
+import Todo from './Todo'
 
 const nowDate = new Date().toISOString().slice(0, 10)
 

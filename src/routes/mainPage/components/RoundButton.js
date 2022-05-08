@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types'
+
 import styles from './RoundButton.module.scss'
 
 function RoundButton({ children, onClick, className, ariaLabel }) {
   return (
-    <button type='button' onClick={onClick} className={`${styles.roundButton} ${className}` } aria-label={ariaLabel}> 
+    <button type='button' onClick={onClick} className={`${styles.roundButton} ${className}`} aria-label={ariaLabel}>
       {children}
     </button>
   )

@@ -1,8 +1,10 @@
 import { useState, useRef, useEffect } from 'react'
-import styles from './TodoCategory.module.scss'
+
 import PropTypes from 'prop-types'
-import cx from 'classnames'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+
+import styles from './TodoCategory.module.scss'
+import { cx } from '../../../styles'
 
 const CATE_LIST = [
   {

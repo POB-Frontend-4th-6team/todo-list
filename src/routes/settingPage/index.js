@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react'
+
 import { Link } from 'react-router-dom'
-import styles from './SettingPage.module.scss'
-import Button from './Components/Button'
 import LightSpeed from 'react-reveal/LightSpeed'
 import Shake from 'react-reveal/Shake'
+import { BsCalendarCheck } from 'react-icons/bs'
+
+import styles from './SettingPage.module.scss'
+import Button from './Components/Button'
 import avatar from './Components/Avatars/avatar1.png'
 import Header from '../../components/Header/Header'
-import { BsCalendarCheck } from 'react-icons/bs'
 
 function SettingPage() {
   const [userId, setUserId] = useState('')
