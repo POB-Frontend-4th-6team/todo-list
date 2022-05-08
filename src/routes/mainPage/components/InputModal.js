@@ -67,6 +67,7 @@ function InputModal({ isVisible, handleModalVisible }) {
 
   const handleModalClose = () => {
     handleModalVisible(false)
+    setShowDropdown(false)
   }
 
   return (
