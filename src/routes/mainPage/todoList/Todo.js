@@ -22,8 +22,10 @@ function Todo({ id, task, category, completed, onClick }) {
       </div>
       {/* <div className={cx(styles.taskMessage, { [styles.taskMessageCompleted]: completed })}>{task}</div> */}
       <div className={styles.taskMessageBox}>
-        <p className={styles.taskMessage}>{task}</p>
-        {completed && <div className={styles.taskMessageLine} />}
+        <p className={styles.taskMessage}>
+          {task}
+          {completed && <div className={styles.taskMessageLine} />}
+        </p>
       </div>
     </li>
   )

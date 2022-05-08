@@ -64,20 +64,22 @@
   position: relative;
   width: 80%;
   height: 100%;
+  padding-right: 10px;
+  overflow-y: auto;
   font-size: sizes.$TASK_FONT_SIZE;
-  text-overflow: ellipsis;
   white-space: nowrap;
 
   .taskMessage {
-    position: absolute;
+    @include flexbox.flexbox(center, center);
+    position: relative;
     font-size: 17px;
     color: colors.$TASK_ITEM_TITLE;
-  }
 
-  .taskMessageLine {
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    background-color: colors.$TASK_ITEM_TITLE;
+    .taskMessageLine {
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: colors.$TASK_ITEM_TITLE;
+    }
   }
 }
