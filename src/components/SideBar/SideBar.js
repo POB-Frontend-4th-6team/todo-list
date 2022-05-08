@@ -32,8 +32,8 @@ function SideBar() {
     <div className={cx(styles.container, { [styles.showSideBar]: !isSideOpen })}>
       <section className={styles.topSection}>
         <Profile />
-        <button type='button' className={styles.closeButton}>
-          <CloseButton className={styles.closeButtonIcon} onClick={toggleSideBar} />
+        <button type='button' className={styles.closeButton} onClick={toggleSideBar}>
+          <CloseButton className={styles.closeButtonIcon} />
         </button>
       </section>
       <h2 className={styles.userName}>{user.name}</h2>
