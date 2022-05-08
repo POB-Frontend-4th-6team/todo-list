@@ -12,7 +12,7 @@ import { useHistory, Link } from 'react-router-dom'
 
 function SideBar() {
   const { isSideOpen, setIsSideOpen } = useSideBarStore()
-  const { dispatch } = useUserStore()
+  const { user, dispatch } = useUserStore()
   const history = useHistory()
 
   const toggleSideBar = () => {
@@ -24,7 +24,7 @@ function SideBar() {
     dispatch({ type: 'REMOVE_USER' })
 
     history.replace('/login')
-    window.location.reload()
+    setIsSideOpen(false)
   }
 
   return (
@@ -35,11 +35,7 @@ function SideBar() {
           <CloseButton className={styles.closeButtonIcon} onClick={toggleSideBar} />
         </button>
       </section>
-      <h2 className={styles.userName}>
-        Joy
-        <br />
-        Mitchell
-      </h2>
+      <h2 className={styles.userName}>{user.name}</h2>
       <ul className={styles.menuItems}>
         <li className={styles.menuItem}>
           <OverviewIcon className={styles.menuIcon} />
