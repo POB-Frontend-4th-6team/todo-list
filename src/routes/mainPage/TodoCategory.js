@@ -50,12 +50,12 @@ function TodoCategory() {
   const [hobCompleted, setHobCompleted] = useState(0)
 
   const catesRef = useRef()
+  
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const task = localStorage.getItem('task') === null ? [] : JSON.parse(localStorage.getItem('task'))
 
   const taskState = [ allTask, businessTask, healthTask, personalTask, hobbyTask ]
   const taskProgress = [allCompleted, bsCompleted, heCompleted, perCompleted, hobCompleted]
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const task = localStorage.getItem('task') === null ? [] : JSON.parse(localStorage.getItem('task'))
   
   useEffect(() => {
     setTask( Object.keys(task).length )
@@ -68,7 +68,6 @@ function TodoCategory() {
     setPerCompleted(() => personalTask === 0 ? 0 : task.filter((item) => item.category === 'personal' && item.completed).length / personalTask  * 100 )
     setHobby( task.filter((item) => item.category === 'hobby').length )
     setHobCompleted(() => hobbyTask === 0 ? 0 : task.filter((item) => item.category === 'personal' && item.completed).length / hobbyTask  * 100 )
-
   }, [allTask, businessTask, heCompleted, healthTask, hobbyTask, personalTask, task])
 
   const handleClickCate = (e) => {
@@ -127,10 +126,6 @@ function TodoCategory() {
           ))}
         </ul>
       </div>
-      <p>
-        {/* category 값 */}
-        {currentCate}
-      </p>
     </section>
   )
 }

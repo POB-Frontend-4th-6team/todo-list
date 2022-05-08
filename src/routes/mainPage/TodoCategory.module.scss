@@ -107,10 +107,10 @@
             border: 2px solid rgba(colors.$CATEGORY_BUSINESS, 50%);
           }
           &.health {
-            border: 2px solid rgba(colors.$CATEGORY_PERSONAL, 50%);
+            border: 2px solid rgba(colors.$CATEGORY_HEALTH, 50%);
           }
           &.personal {
-            border: 2px solid rgba(colors.$CATEGORY_HEALTH, 50%);
+            border: 2px solid rgba(colors.$CATEGORY_PERSONAL, 50%);
           }
           &.hobby {
             border: 2px solid rgba(colors.$CATEGORY_HOBBY, 50%);
@@ -123,10 +123,10 @@
             background: rgba(colors.$CATEGORY_BUSINESS, 35%);
           }
           .taskProgress.health {
-            background: rgba(colors.$CATEGORY_PERSONAL, 35%);
+            background: rgba(colors.$CATEGORY_HEALTH, 35%);
           }
           .taskProgress.personal {
-            background: rgba(colors.$CATEGORY_HEALTH, 35%);
+            background: rgba(colors.$CATEGORY_PERSONAL, 35%);
           }
           .taskProgress.hobby {
             background: rgba(colors.$CATEGORY_HOBBY, 35%);
