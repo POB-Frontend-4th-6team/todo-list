@@ -27,10 +27,7 @@ function Todo({ id, task, category, completed, onClick, deleteTask, onClickEditL
       </div>
       <div className={styles.taskMessageBox}>
         <button type='button' onClick={() => onClickEditList(taskObj)}>
-          <div className={styles.taskMessage}>
-            {task}
-            {completed && <div className={styles.taskMessageLine} />}
-          </div>
+          <span className={cx(styles.taskMessage, { [styles.taskCompleted]: completed })}>{task}</span>
         </button>
       </div>
       <BsTrash className={styles.deleteIcon} onClick={handleDeleteIconClick} />
