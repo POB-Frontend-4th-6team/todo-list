@@ -34,7 +34,6 @@ const CATE_LIST = [
 
 const TOTAL_SLIDES = 3
 
-
 function TodoCategory({ currentCate, setCate }) {
   const [currentIndex, setIndex] = useState(0)
   const [allTask, setTask] = useState(0)
@@ -117,9 +116,9 @@ function TodoCategory({ currentCate, setCate }) {
                 </span>
                 <span className={styles.cateTitle}>{cate.text}</span>
                 <div className={cx(styles.taskProgressWrap, styles[cate.category])}>
-                  <div style={{width: `${taskProgress[idx]}%` }} />
+                  <div className={styles.taskProgress} style={{width: `${Math.ceil(taskProgress[idx])}%` }} />
                 </div>
-                <span className={styles.percent}>{taskProgress[idx]}%</span>
+                <span className={styles.percent}>{Math.ceil(taskProgress[idx])}%</span>
               </button>
             </li>
           ))}
