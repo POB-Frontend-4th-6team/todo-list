@@ -3,35 +3,27 @@ import { Link } from 'react-router-dom'
 import styles from './SettingPage.module.scss'
 import Button from './Components/Button'
 import LightSpeed from 'react-reveal/LightSpeed'
-import Shake from 'react-reveal/Shake'
 import avatar from './Components/Avatars/avatar1.png'
 import Header from '../../components/Header/Header'
 import { BsCalendarCheck } from 'react-icons/bs'
+import { useUserStore } from '../../store/UserContext'
 
 function SettingPage() {
+  const { user, dispatch } = useUserStore()
+
   const [userId, setUserId] = useState('')
   const [username, setUsername] = useState('')
   const [changeName, setChangeName] = useState(false)
-  const [imageIndex, setImageIndex] = useState(undefined)
-  const [userIndex, setUserIndex] = useState(2)
 
   useEffect(() => {
-    localStorage.setItem('user1', JSON.stringify({ userId: 'iamchho', name: 'Chiho Lee', img_idx: 0 }))
-    localStorage.setItem('user2', JSON.stringify({ userId: 'songahji', name: 'Songah Park', img_idx: 1 }))
-    localStorage.setItem('user3', JSON.stringify({ userId: 'dogmaru', name: 'Maru Jung', img_idx: 2 }))
-  }, [])
-
-  useEffect(() => {
-    let res = localStorage.getItem(`user${userIndex}`)
-    res = JSON.parse(res)
-
-    setUserId((prevId) => res.userId)
-    setUsername((prevUsername) => res.name)
-    setImageIndex((prevIndex) => res.img_idx)
-  }, [])
+    if (user) {
+      setUserId((prevId) => user.id)
+      setUsername((prevUsername) => user.name)
+    }
+  }, [user])
 
   const handleChange = () => {
-    setChangeName((prevBoolean) => !changeName)
+    setChangeName((prev) => !changeName)
   }
 
   const handleChangeUsername = (e) => {
@@ -39,9 +31,12 @@ function SettingPage() {
   }
 
   const handleSaveUsername = () => {
-    const getData = JSON.parse(localStorage.getItem(`user${userIndex}`))
-    getData.name = username
-    localStorage.setItem('user1', JSON.stringify(getData))
+    dispatch({ type: 'CHAMGE_USER', id: userId, name: username })
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem('user')
+    dispatch({ type: 'REMOVE_USER' })
   }
 
   return (
@@ -54,7 +49,7 @@ function SettingPage() {
               <h1>Account</h1>
               <p>{username}</p>
             </header>
-            <img src={avatar} className={styles.profile} />
+            <img src={avatar} alt='Profile' className={styles.profile} />
           </div>
 
           <div className={styles.settingInfo}>
@@ -68,7 +63,7 @@ function SettingPage() {
               <h1 className={styles.usernameHeader}>User ID</h1>
               <p>{userId}</p>
 
-              <Link to='/history' target='_top'>
+              <Link to='/history'>
                 <h2 className={styles.historyContainer}>
                   <BsCalendarCheck className={styles.calendarIcon} />
                   Check Consistency
@@ -86,13 +81,13 @@ function SettingPage() {
                 For <span>safe use</span> of App, <br /> <br />
                 Please log out.
               </p>
-              <Link to='/' target='_top'>
+              <Link to='/'>
                 <Button handler={handleSaveUsername}>Save and Exit</Button>
               </Link>
             </header>
             <div>
-              <Link to='/login' target='_top'>
-                <Button>Log out</Button>
+              <Link to='/login'>
+                <Button handler={handleLogout}>Log out</Button>
               </Link>
             </div>
           </div>
