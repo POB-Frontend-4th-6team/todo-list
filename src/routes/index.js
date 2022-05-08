@@ -11,7 +11,6 @@ import UserContextProvider, { useUserStore } from '../store/UserContext'
 import SideBar from '../components/SideBar/SideBar'
 
 function App() {
-  console.log(localStorage.getItem('user'))
   return (
     <Router>
       <UserContextProvider>

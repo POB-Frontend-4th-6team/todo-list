@@ -7,7 +7,6 @@
   @include flexbox.flexbox(0, center);
   flex-direction: row;
   width: 98%;
-  // height: 20%;
   padding: 20px 10px;
   margin-bottom: 7px;
   background-color: colors.$WHITE;
@@ -64,8 +63,7 @@
   @include flexbox.flexbox(0, center);
   position: relative;
   width: 80%;
-  // height: 100%;
-  padding-right: 10px;
+  padding: 5px 0;
   overflow: hidden;
   font-size: sizes.$TASK_FONT_SIZE;
   text-overflow: ellipsis;
@@ -73,9 +71,9 @@
   .taskMessage {
     @include flexbox.flexbox(center, center);
     position: relative;
-    word-break: break-all;
     font-size: 17px;
     color: colors.$TASK_ITEM_TITLE;
+    word-break: break-all;
 
     .taskMessageLine {
       position: absolute;
