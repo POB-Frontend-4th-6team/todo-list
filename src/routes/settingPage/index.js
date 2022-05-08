@@ -15,11 +15,11 @@ function SettingPage() {
   const [imageIndex, setImageIndex] = useState(undefined)
   const [userIndex, setUserIndex] = useState(2)
 
-  // useEffect(() => {
-  //   localStorage.setItem('user1', JSON.stringify({ userId: 'iamchho', name: 'Chiho Lee', img_idx: 0 }))
-  //   localStorage.setItem('user2', JSON.stringify({ userId: 'songahji', name: 'Songah Park', img_idx: 1 }))
-  //   localStorage.setItem('user3', JSON.stringify({ userId: 'dogmaru', name: 'Maru Jung', img_idx: 2 }))
-  // }, [])
+  useEffect(() => {
+    localStorage.setItem('user1', JSON.stringify({ userId: 'iamchho', name: 'Chiho Lee', img_idx: 0 }))
+    localStorage.setItem('user2', JSON.stringify({ userId: 'songahji', name: 'Songah Park', img_idx: 1 }))
+    localStorage.setItem('user3', JSON.stringify({ userId: 'dogmaru', name: 'Maru Jung', img_idx: 2 }))
+  }, [])
 
   useEffect(() => {
     let res = localStorage.getItem(`user${userIndex}`)
