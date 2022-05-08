@@ -6,12 +6,24 @@ import { FiSettings as SettingsIcon } from 'react-icons/fi'
 import { RiLogoutBoxLine as LogoutIcon } from 'react-icons/ri'
 import { useSideBarStore } from '../../store/SideBarContext'
 import { cx } from '../../styles'
+import { useUserStore } from '../../store/UserContext'
+import { useHistory } from 'react-router-dom'
 
 function SideBar() {
   const { isSideOpen, setIsSideOpen } = useSideBarStore()
+  const { dispatch } = useUserStore()
+  const history = useHistory()
 
   const toggleSideBar = () => {
     setIsSideOpen(false)
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem('user')
+    dispatch({ type: 'REMOVE_USER' })
+
+    history.replace('/login')
+    window.location.reload()
   }
 
   return (
@@ -36,7 +48,7 @@ function SideBar() {
           <SettingsIcon className={styles.menuIcon} />
           <span className={styles.menuItemTitle}>Settings</span>
         </li>
-        <li className={styles.menuItem}>
+        <li className={styles.menuItem} onClick={handleLogout} role='presentation'>
           <LogoutIcon className={styles.menuIcon} />
           <span className={styles.menuItemTitle}>Logout</span>
         </li>

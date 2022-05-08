@@ -3,11 +3,12 @@ import styles from './InputModal.module.scss'
 import { FiX, FiChevronUp } from 'react-icons/fi'
 import { IoMdRadioButtonOn } from 'react-icons/io'
 import { cx } from '../../../styles'
+import PropTypes from 'prop-types'
 
 const CATEGORY = ['business', 'personal', 'health', 'hobby']
 const today = new Date().toISOString().split('T')[0]
 
-function InputModal() {
+function InputModal({ isVisible, handleModalVisible }) {
   const [expirationDate, setExpirationDate] = useState('')
   const [taskTitle, setTaskTitle] = useState('')
   const [showDropdown, setShowDropdown] = useState(false)
@@ -46,6 +47,7 @@ function InputModal() {
       setTaskTitle('')
       setExpirationDate('')
       setSelectedCategory('business')
+      handleModalVisible(false)
     }
   }
 
@@ -63,9 +65,13 @@ function InputModal() {
     setShowDropdown((prev) => !prev)
   }
 
+  const handleModalClose = () => {
+    handleModalVisible(false)
+  }
+
   return (
-    <div className={styles.inputModal}>
-      <button className={styles.closeButton} type='button'>
+    <div className={cx(styles.inputModal, { [styles.open]: isVisible })}>
+      <button className={styles.closeButton} type='button' onClick={handleModalClose}>
         <FiX size='20' />
       </button>
       <div className={styles.inputWrapper}>
@@ -119,4 +125,8 @@ function InputModal() {
   )
 }
 
+InputModal.propTypes = {
+  isVisible: PropTypes.bool,
+  handleModalVisible: PropTypes.func,
+}
 export default InputModal
