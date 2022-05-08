@@ -59,7 +59,7 @@ function TodoList({ currentCate }) {
     let data = localStorage.getItem('task')
     data = JSON.parse(data).filter((task) => new Date(task.expiry_date) > new Date(nowDate))
 
-    localStorage.clear()
+    localStorage.removeItem('task')
     localStorage.setItem('task', JSON.stringify(data))
     setTaskState(data)
   }, [])
@@ -79,7 +79,7 @@ function TodoList({ currentCate }) {
     const newList = [...data]
     const targetIndex = data.findIndex((task) => task.id === Number(id))
     newList[targetIndex].completed = !completed
-    localStorage.clear()
+    localStorage.removeItem('task')
     localStorage.setItem('task', JSON.stringify(newList))
 
     setTaskState((prev) => {

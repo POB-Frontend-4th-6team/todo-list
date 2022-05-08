@@ -17,6 +17,8 @@ function MainPage() {
   const [currentCate, setCate] = useState('all')
   const [modalVisible, setmodalVisible] = useState(false)
 
+  console.log(localStorage.getItem('user'))
+
   return (
     <>
       <Header />
