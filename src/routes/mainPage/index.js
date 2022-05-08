@@ -11,7 +11,6 @@ import RoundButton from './components/RoundButton'
 import Header from '../../components/Header/Header'
 import InputModal from './components/InputModal'
 
-
 function MainPage() {
   const [modalVisible, setmodalVisible] = useState(false)
   return (
@@ -57,35 +56,35 @@ function FloatButton({ handleOpenAddModal }) {
 
   return (
     <nav ref={buttonMenuRef}>
-    <span className={styles.circularMenu}>
+      <span className={styles.circularMenu}>
+        <RoundButton
+          onClick={handleAddClick}
+          className={cx({ [buttonStyles.addButtonOpen]: menuOpen }, { [buttonStyles.hideButton]: !menuOpen })}
+          aria-label='Add button'
+        >
+          <AiOutlinePlus size='2em' />
+        </RoundButton>
+        <RoundButton
+          onClick={handleEditClick}
+          className={cx({ [buttonStyles.editButtonOpen]: menuOpen }, { [buttonStyles.hideButton]: !menuOpen })}
+          aria-label='Edit button'
+        >
+          <MdModeEditOutline size='1.3em' />
+        </RoundButton>
+      </span>
       <RoundButton
-        onClick={handleAddClick}
-        className={cx({ [buttonStyles.addButtonOpen]: menuOpen }, { [buttonStyles.hideButton]: !menuOpen })}
-        aria-label='Add button'
+        onClick={handleOpenClick}
+        className={cx(buttonStyles.openMenuButton, { [buttonStyles.bump]: menuOpen })}
+        aria-label='Open button'
       >
-        <AiOutlinePlus size='2em' />
+        <CgEditBlackPoint size='1.5em' />
       </RoundButton>
-      <RoundButton
-        onClick={handleEditClick}
-        className={cx({ [buttonStyles.editButtonOpen]: menuOpen }, { [buttonStyles.hideButton]: !menuOpen })}
-        aria-label='Edit button'
-      >
-        <MdModeEditOutline size='1.3em' />
-      </RoundButton>
-    </span>
-    <RoundButton
-      onClick={handleOpenClick}
-      className={cx(buttonStyles.openMenuButton, { [buttonStyles.bump]: menuOpen })}
-      aria-label='Open button'
-    >
-      <CgEditBlackPoint size='1.5em' />
-    </RoundButton>
-  </nav>
-)
+    </nav>
+  )
 }
 
 FloatButton.propTypes = {
-handleOpenAddModal: PropTypes.func,
+  handleOpenAddModal: PropTypes.func,
 }
 
 export default MainPage
