@@ -6,8 +6,8 @@
 .todoContainer {
   @include flexbox.flexbox(0, center);
   flex-direction: row;
-  width: 98%;
-  height: 20%;
+  width: 100%;
+  padding: 20px 10px;
   margin-bottom: 7px;
   background-color: colors.$WHITE;
   border-radius: sizes.$TODO_BORDER_RADIUS;
@@ -16,6 +16,10 @@
 
   &:hover {
     transform: scale(1.02);
+
+    .deleteIcon {
+      visibility: visible;
+    }
   }
 }
 
@@ -48,6 +52,22 @@
     &.hobby {
       border: 2px solid colors.$CATEGORY_HOBBY;
     }
+
+    &.businessSelected {
+      background-color: colors.$CATEGORY_BUSINESS;
+    }
+
+    &.personalSelected {
+      background-color: colors.$CATEGORY_PERSONAL;
+    }
+
+    &.healthSelected {
+      background-color: colors.$CATEGORY_HEALTH;
+    }
+
+    &.hobbySelected {
+      background-color: colors.$CATEGORY_HOBBY;
+    }
   }
 
   svg {
@@ -62,18 +82,18 @@
 .taskMessageBox {
   @include flexbox.flexbox(0, center);
   position: relative;
-  width: 80%;
-  height: 100%;
-  padding-right: 10px;
-  overflow-y: auto;
+  width: 65%;
+  padding: 5px 0;
+  overflow: hidden;
   font-size: sizes.$TASK_FONT_SIZE;
-  white-space: nowrap;
+  text-overflow: ellipsis;
 
   .taskMessage {
     @include flexbox.flexbox(center, center);
     position: relative;
-    font-size: 17px;
+    font-size: 15px;
     color: colors.$TASK_ITEM_TITLE;
+    word-break: break-all;
 
     .taskMessageLine {
       position: absolute;
@@ -82,4 +102,10 @@
       background-color: colors.$TASK_ITEM_TITLE;
     }
   }
+}
+
+.deleteIcon {
+  width: 15%;
+  cursor: pointer;
+  visibility: hidden;
 }

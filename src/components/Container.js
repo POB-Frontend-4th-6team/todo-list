@@ -1,7 +1,8 @@
-import styles from './Components.module.scss'
 import PropTypes from 'prop-types'
-import { useSideBarStore } from '../store/SideBarContext'
+
+import styles from './Components.module.scss'
 import { cx } from '../styles'
+import { useSideBarStore } from '../store/SideBarContext'
 
 function Container({ children }) {
   const { isSideOpen } = useSideBarStore()

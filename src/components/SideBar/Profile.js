@@ -1,5 +1,6 @@
-import styles from './Profile.module.scss'
 import { CgProfile as ProfileImg } from 'react-icons/cg'
+
+import styles from './Profile.module.scss'
 
 function Profile() {
   return (

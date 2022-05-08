@@ -1,68 +1,25 @@
-import { useCallback, useEffect, useState } from 'react'
-import Todo from './Todo'
-import styles from './TodoList.module.scss'
+import { useCallback, useEffect } from 'react'
+
 import PropTypes from 'prop-types'
 
-// 더미 데이터
-const Tasks = [
-  {
-    id: 1,
-    task: 'Daily meeting with team',
-    category: 'business',
-    completed: false,
-    expiry_date: new Date().toISOString().slice(0, 10),
-    complete_data: new Date().toISOString().slice(0, 10),
-  },
-  {
-    id: 2,
-    task: 'Daily meeting with team',
-    category: 'personal',
-    completed: false,
-    expiry_date: new Date(),
-    complete_data: new Date(),
-  },
-  {
-    id: 3,
-    task: 'Daily',
-    category: 'business',
-    completed: true,
-    expiry_date: new Date(),
-    complete_data: new Date(),
-  },
-  {
-    id: 4,
-    task: 'Daily meeting with team && Walking',
-    category: 'hobby',
-    completed: false,
-    expiry_date: new Date(),
-    complete_data: new Date(),
-  },
-  {
-    id: 5,
-    task: 'Daily meeting with team',
-    category: 'health',
-    completed: false,
-    expiry_date: new Date(),
-    complete_data: new Date(),
-  },
-]
-
-localStorage.setItem('task', JSON.stringify(Tasks))
+import styles from './TodoList.module.scss'
+import Todo from './Todo'
 
 const nowDate = new Date().toISOString().slice(0, 10)
 
-function TodoList({ currentCate }) {
-  const [taskState, setTaskState] = useState([])
-
+function TodoList({ currentCate, modalVisible, taskState, setTaskState, setmodalVisible, setselectedTask }) {
   // 마운트시 현재 날짜보다 만료일이 작은 값들만 추출 후 state변경
   useEffect(() => {
     let data = localStorage.getItem('task')
-    data = JSON.parse(data).filter((task) => new Date(task.expiry_date) > new Date(nowDate))
+    data =
+      localStorage.getItem('task') === null
+        ? []
+        : JSON.parse(data).filter((task) => new Date(task.expiry_date) >= new Date(nowDate))
 
-    localStorage.clear()
+    localStorage.removeItem('task')
     localStorage.setItem('task', JSON.stringify(data))
     setTaskState(data)
-  }, [])
+  }, [modalVisible])
 
   useEffect(() => {
     let data = localStorage.getItem('task')
@@ -74,12 +31,29 @@ function TodoList({ currentCate }) {
 
   const onClick = useCallback((id, completed) => {
     // 로컬 따로 state따로 값을 변경해야함
+    const date = new Date()
+    const year = date.getFullYear()
+    let month = date.getMonth() + 1
+    let day = date.getDate()
+    if(String(day).length === 1){
+      day = `0${ day}` 
+    }
+    if(String(month).length === 1){
+      month = `0${ month}` 
+    }
+
+  
     let data = localStorage.getItem('task')
     data = JSON.parse(data)
     const newList = [...data]
     const targetIndex = data.findIndex((task) => task.id === Number(id))
     newList[targetIndex].completed = !completed
-    localStorage.clear()
+    if(newList[targetIndex].completed){
+      newList[targetIndex].completed_date = `${year}-${month}-${day}`
+    } else {
+      newList[targetIndex].completed_date = null
+    }
+    localStorage.removeItem('task')
     localStorage.setItem('task', JSON.stringify(newList))
 
     setTaskState((prev) => {
@@ -89,6 +63,22 @@ function TodoList({ currentCate }) {
       return newList
     })
   }, [])
+
+  const deleteTask = (id) => {
+    const localStorageTasks = localStorage.getItem('task')
+    const newTasks = JSON.parse(localStorageTasks).filter((task) => task.id !== id)
+    localStorage.setItem('task', JSON.stringify(newTasks))
+    setTaskState(newTasks)
+  }
+
+  const onClickEditList = (id) => {
+    if (modalVisible.isEdit) {
+      setselectedTask(id)
+      console.log('고칠 id ', id)
+      setmodalVisible({ isEdit: true, isVisible: true })
+    }
+    console.log(modalVisible.isEdit)
+  }
 
   return (
     <div className={styles.todoListContainer}>
@@ -104,6 +94,9 @@ function TodoList({ currentCate }) {
             category={Task.category}
             completed={Task.completed}
             onClick={onClick}
+            deleteTask={deleteTask}
+            taskObj={Task}
+            onClickEditList={onClickEditList}
           >
             {Task.task}
           </Todo>
@@ -113,8 +106,26 @@ function TodoList({ currentCate }) {
   )
 }
 
+const taskType = {
+  id: PropTypes.number,
+  task: PropTypes.string,
+  category: PropTypes.string,
+  completed: PropTypes.bool,
+  expiry_date: PropTypes.string,
+  completed_date: PropTypes.string,
+}
+
 TodoList.propTypes = {
   currentCate: PropTypes.string,
+  modalVisible: PropTypes.shape({
+    id: PropTypes.string,
+    isVisible: PropTypes.bool,
+    isEdit: PropTypes.bool,
+  }),
+  taskState: PropTypes.arrayOf(PropTypes.shape(taskType)),
+  setTaskState: PropTypes.func,
+  setselectedTask: PropTypes.func,
+  setmodalVisible: PropTypes.func,
 }
 
 export default TodoList

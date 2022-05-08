@@ -1,5 +1,6 @@
-import styles from './Header.module.scss'
 import { CgMenu } from 'react-icons/cg'
+
+import styles from './Header.module.scss'
 import { useSideBarStore } from '../../store/SideBarContext'
 
 function Header() {
