@@ -14,7 +14,7 @@ function TodoList({ currentCate, modalVisible, taskState, setTaskState }) {
     data =
       localStorage.getItem('task') === null
         ? []
-        : JSON.parse(data).filter((task) => new Date(task.expiry_date) > new Date(nowDate))
+        : JSON.parse(data).filter((task) => new Date(task.expiry_date) >= new Date(nowDate))
 
     localStorage.removeItem('task')
     localStorage.setItem('task', JSON.stringify(data))

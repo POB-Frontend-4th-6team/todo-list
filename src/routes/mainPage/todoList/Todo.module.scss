@@ -91,7 +91,7 @@
   .taskMessage {
     @include flexbox.flexbox(center, center);
     position: relative;
-    font-size: 16px;
+    font-size: 15px;
     color: colors.$TASK_ITEM_TITLE;
     word-break: break-all;
 

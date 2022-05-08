@@ -25,9 +25,9 @@ function InputModal({ isVisible, handleModalVisible }) {
   }
 
   const getLastId = (taskArr) => {
-    const lastTask = taskArr[taskArr.length-1]
-    if(!lastTask)return 0
-    return lastTask.id +1
+    const lastTask = taskArr[taskArr.length - 1]
+    if (!lastTask) return 0
+    return lastTask.id + 1
   }
   const handleSetTask = () => {
     if (!taskTitle) {
@@ -37,7 +37,7 @@ function InputModal({ isVisible, handleModalVisible }) {
     } else {
       const getTask = localStorage.getItem('task')
       const getTaskArr = JSON.parse(getTask)
-      const taskId = getLastId(getTaskArr)+1
+      const taskId = getLastId(getTaskArr)
       const taskObj = {
         id: taskId,
         task: taskTitle,
