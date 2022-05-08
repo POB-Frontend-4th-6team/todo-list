@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 
 import PropTypes from 'prop-types'
 import { AiOutlinePlus } from 'react-icons/ai'
+import { MdModeEditOutline } from 'react-icons/md'
 import { CgEditBlackPoint } from 'react-icons/cg'
 
 import styles from './MainPage.module.scss'
@@ -16,8 +17,13 @@ import { useUserStore } from '../../store/UserContext'
 
 function MainPage() {
   const [currentCate, setCate] = useState('all')
-  const [modalVisible, setmodalVisible] = useState(false)
   const [taskState, setTaskState] = useState([])
+  const [modalVisible, setmodalVisible] = useState({ isEdit: false, isVisible: false })
+  const [selectedTask, setselectedTask] = useState(null)
+
+  const handleEditClick = () => {
+    setmodalVisible({ isEdit: true, isVisible: false })
+  }
 
   const { user } = useUserStore()
 
@@ -36,16 +42,28 @@ function MainPage() {
             modalVisible={modalVisible}
             taskState={taskState}
             setTaskState={setTaskState}
+            setselectedTask={setselectedTask}
+            setmodalVisible={setmodalVisible}
           />
         </div>
-        <FloatButton handleOpenAddModal={setmodalVisible} />
-        <InputModal isVisible={modalVisible} handleModalVisible={setmodalVisible} />
+        <FloatButton setmodalVisible={setmodalVisible} handleEditClick={handleEditClick} />
+
+        {modalVisible.isVisible && (
+          <InputModal
+            modalVisible={modalVisible}
+            handleModalVisible={setmodalVisible}
+            selectedTask={selectedTask}
+            taskState={taskState}
+            setTaskState={setTaskState}
+            setselectedTask={setselectedTask}
+          />
+        )}
       </div>
     </>
   )
 }
 
-function FloatButton({ handleOpenAddModal }) {
+function FloatButton({ setmodalVisible }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const buttonMenuRef = useRef(null)
 
@@ -54,8 +72,13 @@ function FloatButton({ handleOpenAddModal }) {
   }
 
   const handleAddClick = () => {
-    setMenuOpen((prev) => !prev)
-    handleOpenAddModal(true)
+    setMenuOpen(false)
+    setmodalVisible({ isEdit: false, isVisible: true })
+  }
+
+  const handleEditClick = () => {
+    setMenuOpen(false)
+    setmodalVisible((prev) => ({ isEdit: !prev.isEdit, isVisible: false }))
   }
 
   useEffect(() => {
@@ -81,6 +104,13 @@ function FloatButton({ handleOpenAddModal }) {
         >
           <AiOutlinePlus size='2em' />
         </RoundButton>
+        <RoundButton
+          onClick={handleEditClick}
+          className={cx({ [buttonStyles.editButtonOpen]: menuOpen }, { [buttonStyles.hideButton]: !menuOpen })}
+          aria-label='Edit button'
+        >
+          <MdModeEditOutline size='1.3em' />
+        </RoundButton>
       </span>
       <RoundButton
         onClick={handleOpenClick}
@@ -94,7 +124,7 @@ function FloatButton({ handleOpenAddModal }) {
 }
 
 FloatButton.propTypes = {
-  handleOpenAddModal: PropTypes.func,
+  setmodalVisible: PropTypes.func,
 }
 
 export default MainPage

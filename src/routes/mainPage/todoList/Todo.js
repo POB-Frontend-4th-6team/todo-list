@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import styles from './Todo.module.scss'
 import { cx } from '../../../styles'
 
-function Todo({ id, task, category, completed, onClick, deleteTask }) {
+function Todo({ id, task, category, completed, onClick, deleteTask, onClickEditList, taskObj, isEdit }) {
   const handleClick = () => {
     onClick(id, completed)
   }
@@ -16,7 +16,7 @@ function Todo({ id, task, category, completed, onClick, deleteTask }) {
   }
 
   return (
-    <li className={styles.todoContainer}>
+    <li className={cx(styles.todoContainer, { [styles.edit]: isEdit })}>
       <div className={styles.checkBox}>
         <button
           className={cx(styles.checkBtn, styles[category], { [styles[`${category}Selected`]]: completed })}
@@ -26,10 +26,12 @@ function Todo({ id, task, category, completed, onClick, deleteTask }) {
         />
       </div>
       <div className={styles.taskMessageBox}>
-        <div className={styles.taskMessage}>
-          {task}
-          {completed && <div className={styles.taskMessageLine} />}
-        </div>
+        <button type='button' onClick={() => onClickEditList(taskObj)}>
+          <div className={styles.taskMessage}>
+            {task}
+            {completed && <div className={styles.taskMessageLine} />}
+          </div>
+        </button>
       </div>
       <BsTrash className={styles.deleteIcon} onClick={handleDeleteIconClick} />
     </li>
@@ -43,6 +45,16 @@ Todo.propTypes = {
   completed: PropTypes.bool,
   onClick: PropTypes.func,
   deleteTask: PropTypes.func,
+  onClickEditList: PropTypes.func,
+  taskObj: PropTypes.shape({
+    id: PropTypes.number,
+    task: PropTypes.string,
+    category: PropTypes.string,
+    completed: PropTypes.bool,
+    expiry_date: PropTypes.string,
+    complete_data: PropTypes.string,
+  }),
+  isEdit: PropTypes.bool,
 }
 
 export default memo(Todo)

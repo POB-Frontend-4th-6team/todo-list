@@ -7,7 +7,7 @@ import Todo from './Todo'
 
 const nowDate = new Date().toISOString().slice(0, 10)
 
-function TodoList({ currentCate, modalVisible, taskState, setTaskState }) {
+function TodoList({ currentCate, modalVisible, taskState, setTaskState, setmodalVisible, setselectedTask }) {
   // 마운트시 현재 날짜보다 만료일이 작은 값들만 추출 후 state변경
   useEffect(() => {
     let data = localStorage.getItem('task')
@@ -54,6 +54,13 @@ function TodoList({ currentCate, modalVisible, taskState, setTaskState }) {
     setTaskState(newTasks)
   }
 
+  const onClickEditList = (id) => {
+    if (modalVisible.isEdit) {
+      setselectedTask(id)
+      setmodalVisible({ isEdit: true, isVisible: true })
+    }
+  }
+
   return (
     <div className={styles.todoListContainer}>
       <div className={styles.todoListHeader}>
@@ -69,6 +76,9 @@ function TodoList({ currentCate, modalVisible, taskState, setTaskState }) {
             completed={Task.completed}
             onClick={onClick}
             deleteTask={deleteTask}
+            taskObj={Task}
+            onClickEditList={onClickEditList}
+            isEdit={modalVisible.isEdit}
           >
             {Task.task}
           </Todo>
@@ -89,9 +99,15 @@ const taskType = {
 
 TodoList.propTypes = {
   currentCate: PropTypes.string,
-  modalVisible: PropTypes.bool,
+  modalVisible: PropTypes.shape({
+    id: PropTypes.string,
+    isVisible: PropTypes.bool,
+    isEdit: PropTypes.bool,
+  }),
   taskState: PropTypes.arrayOf(PropTypes.shape(taskType)),
   setTaskState: PropTypes.func,
+  setselectedTask: PropTypes.func,
+  setmodalVisible: PropTypes.func,
 }
 
 export default TodoList
