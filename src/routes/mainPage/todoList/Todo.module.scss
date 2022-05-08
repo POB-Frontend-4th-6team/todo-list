@@ -48,6 +48,22 @@
     &.hobby {
       border: 2px solid colors.$CATEGORY_HOBBY;
     }
+
+    &.businessSelected {
+      background-color: colors.$CATEGORY_BUSINESS;
+    }
+
+    &.personalSelected {
+      background-color: colors.$CATEGORY_PERSONAL;
+    }
+
+    &.healthSelected {
+      background-color: colors.$CATEGORY_HEALTH;
+    }
+
+    &.hobbySelected {
+      background-color: colors.$CATEGORY_HOBBY;
+    }
   }
 
   svg {
@@ -71,7 +87,7 @@
   .taskMessage {
     @include flexbox.flexbox(center, center);
     position: relative;
-    font-size: 17px;
+    font-size: 16px;
     color: colors.$TASK_ITEM_TITLE;
     word-break: break-all;
 
