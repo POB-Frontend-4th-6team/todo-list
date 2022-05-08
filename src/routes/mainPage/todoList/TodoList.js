@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect } from 'react'
 import Todo from './Todo'
 import styles from './TodoList.module.scss'
 import PropTypes from 'prop-types'
@@ -27,23 +27,26 @@ function TodoList({ currentCate, modalVisible, taskState, setTaskState }) {
     else setTaskState(data.filter((task) => task.category === currentCate))
   }, [currentCate])
 
-  const onClick = useCallback((id, completed) => {
-    // 로컬 따로 state따로 값을 변경해야함
-    let data = localStorage.getItem('task')
-    data = JSON.parse(data)
-    const newList = [...data]
-    const targetIndex = data.findIndex((task) => task.id === Number(id))
-    newList[targetIndex].completed = !completed
-    localStorage.removeItem('task')
-    localStorage.setItem('task', JSON.stringify(newList))
-
-    setTaskState((prev) => {
-      const targetIndex = prev.findIndex((task) => task.id === Number(id))
-      const newList = [...prev]
+  const onClick = useCallback(
+    (id, completed) => {
+      // 로컬 따로 state따로 값을 변경해야함
+      let data = localStorage.getItem('task')
+      data = JSON.parse(data)
+      const newList = [...data]
+      const targetIndex = data.findIndex((task) => task.id === Number(id))
       newList[targetIndex].completed = !completed
-      return newList
-    })
-  }, [])
+      localStorage.removeItem('task')
+      localStorage.setItem('task', JSON.stringify(newList))
+
+      setTaskState((prev) => {
+        const targetIndex = prev.findIndex((task) => task.id === Number(id))
+        const newList = [...prev]
+        newList[targetIndex].completed = !completed
+        return newList
+      })
+    },
+    [setTaskState]
+  )
 
   return (
     <div className={styles.todoListContainer}>
