@@ -11,7 +11,7 @@
   margin-bottom: 7px;
   background-color: colors.$WHITE;
   border-radius: sizes.$TODO_BORDER_RADIUS;
-  box-shadow: 2px 2px colors.$GRAYA;
+  box-shadow: rgba(149, 157, 165, 10%) 3px 3px 5px;
   transition: 0.2s;
 
   &:hover {
@@ -70,6 +70,8 @@
 
   .taskMessage {
     position: absolute;
+    font-size: 17px;
+    color: colors.$TASK_ITEM_TITLE;
   }
 
   .taskMessageLine {

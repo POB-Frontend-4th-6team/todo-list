@@ -37,7 +37,6 @@ function TodoCategory() {
   const [currentCate, setCate] = useState('all')
   const [currentIndex, setIndex] = useState(0)
   const catesRef = useRef()
-
   const handleClickCate = (e) => {
     const { dataset } = e.currentTarget
     const { category } = dataset
@@ -92,10 +91,6 @@ function TodoCategory() {
           ))}
         </ul>
       </div>
-      <p>
-        {/* category 값 */}
-        {currentCate}
-      </p>
     </section>
   )
 }
