@@ -5,53 +5,53 @@ import PropTypes from 'prop-types'
 
 // 더미 데이터
 const Tasks = [
-  {
-    id: 1,
-    task: 'Daily meeting with team',
-    category: 'business',
-    completed: false,
-    expiry_date: new Date().toISOString().slice(0, 10),
-    complete_data: new Date().toISOString().slice(0, 10),
-  },
-  {
-    id: 2,
-    task: 'Daily meeting with team',
-    category: 'personal',
-    completed: false,
-    expiry_date: new Date(),
-    complete_data: new Date(),
-  },
-  {
-    id: 3,
-    task: 'Daily',
-    category: 'business',
-    completed: true,
-    expiry_date: new Date(),
-    complete_data: new Date(),
-  },
-  {
-    id: 4,
-    task: 'Daily meeting with team && Walking',
-    category: 'hobby',
-    completed: false,
-    expiry_date: new Date(),
-    complete_data: new Date(),
-  },
-  {
-    id: 5,
-    task: 'Daily meeting with team',
-    category: 'health',
-    completed: false,
-    expiry_date: new Date(),
-    complete_data: new Date(),
-  },
+  // {
+  //   id: 1,
+  //   task: 'Daily meeting with team',
+  //   category: 'business',
+  //   completed: false,
+  //   expiry_date: new Date().toISOString().slice(0, 10),
+  //   complete_data: new Date().toISOString().slice(0, 10),
+  // },
+  // {
+  //   id: 2,
+  //   task: 'Daily meeting with team',
+  //   category: 'personal',
+  //   completed: false,
+  //   expiry_date: new Date(),
+  //   complete_data: new Date(),
+  // },
+  // {
+  //   id: 3,
+  //   task: 'Daily',
+  //   category: 'business',
+  //   completed: true,
+  //   expiry_date: new Date(),
+  //   complete_data: new Date(),
+  // },
+  // {
+  //   id: 4,
+  //   task: 'Daily meeting with team && Walking',
+  //   category: 'hobby',
+  //   completed: false,
+  //   expiry_date: new Date(),
+  //   complete_data: new Date(),
+  // },
+  // {
+  //   id: 5,
+  //   task: 'Daily meeting with team',
+  //   category: 'health',
+  //   completed: false,
+  //   expiry_date: new Date(),
+  //   complete_data: new Date(),
+  // },
 ]
 
-localStorage.setItem('task', JSON.stringify(Tasks))
+// localStorage.setItem('task', JSON.stringify(Tasks))
 
 const nowDate = new Date().toISOString().slice(0, 10)
 
-function TodoList({ currentCate }) {
+function TodoList({ currentCate, modalVisible }) {
   const [taskState, setTaskState] = useState([])
 
   // 마운트시 현재 날짜보다 만료일이 작은 값들만 추출 후 state변경
@@ -62,7 +62,7 @@ function TodoList({ currentCate }) {
     localStorage.removeItem('task')
     localStorage.setItem('task', JSON.stringify(data))
     setTaskState(data)
-  }, [])
+  }, [modalVisible])
 
   useEffect(() => {
     let data = localStorage.getItem('task')
@@ -115,6 +115,7 @@ function TodoList({ currentCate }) {
 
 TodoList.propTypes = {
   currentCate: PropTypes.string,
+  modalVisible: PropTypes.bool,
 }
 
 export default TodoList

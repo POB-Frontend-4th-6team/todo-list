@@ -17,7 +17,7 @@ function MainPage() {
   const [currentCate, setCate] = useState('all')
   const [modalVisible, setmodalVisible] = useState(false)
 
-  console.log(localStorage.getItem('user'))
+  console.log(localStorage.getItem('task'))
 
   return (
     <>
@@ -25,7 +25,7 @@ function MainPage() {
       <div className={styles.mainPage}>
         <TodoCategory setCate={setCate} currentCate={currentCate} />
         <div className={styles.mainPageTodoList}>
-          <TodoList currentCate={currentCate} />
+          <TodoList currentCate={currentCate} modalVisible={modalVisible} />
         </div>
         <FloatButton handleOpenAddModal={setmodalVisible} />
         <InputModal isVisible={modalVisible} handleModalVisible={setmodalVisible} />
