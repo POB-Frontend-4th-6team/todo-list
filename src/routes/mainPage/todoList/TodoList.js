@@ -29,26 +29,30 @@ function TodoList({ currentCate, modalVisible, taskState, setTaskState }) {
     else setTaskState(data.filter((task) => task.category === currentCate))
   }, [currentCate])
 
-  const onClick = useCallback(
-    (id, completed) => {
-      // 로컬 따로 state따로 값을 변경해야함
-      let data = localStorage.getItem('task')
-      data = JSON.parse(data)
-      const newList = [...data]
-      const targetIndex = data.findIndex((task) => task.id === Number(id))
-      newList[targetIndex].completed = !completed
-      localStorage.removeItem('task')
-      localStorage.setItem('task', JSON.stringify(newList))
+  const onClick = useCallback((id, completed) => {
+    // 로컬 따로 state따로 값을 변경해야함
+    let data = localStorage.getItem('task')
+    data = JSON.parse(data)
+    const newList = [...data]
+    const targetIndex = data.findIndex((task) => task.id === Number(id))
+    newList[targetIndex].completed = !completed
+    localStorage.removeItem('task')
+    localStorage.setItem('task', JSON.stringify(newList))
 
-      setTaskState((prev) => {
-        const targetIndex = prev.findIndex((task) => task.id === Number(id))
-        const newList = [...prev]
-        newList[targetIndex].completed = !completed
-        return newList
-      })
-    },
-    [setTaskState]
-  )
+    setTaskState((prev) => {
+      const targetIndex = prev.findIndex((task) => task.id === Number(id))
+      const newList = [...prev]
+      newList[targetIndex].completed = !completed
+      return newList
+    })
+  }, [])
+
+  const deleteTask = (id) => {
+    const localStorageTasks = localStorage.getItem('task')
+    const newTasks = JSON.parse(localStorageTasks).filter((task) => task.id !== id)
+    localStorage.setItem('task', JSON.stringify(newTasks))
+    setTaskState(newTasks)
+  }
 
   return (
     <div className={styles.todoListContainer}>
@@ -64,6 +68,7 @@ function TodoList({ currentCate, modalVisible, taskState, setTaskState }) {
             category={Task.category}
             completed={Task.completed}
             onClick={onClick}
+            deleteTask={deleteTask}
           >
             {Task.task}
           </Todo>
