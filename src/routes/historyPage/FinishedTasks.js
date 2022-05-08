@@ -48,7 +48,7 @@ function FinishedTasks() {
           </div>
         </li>
         ))}
-      {isEmpty?<p className={styles.emptyMsg}>완료 일정이 없습니다</p>:null}
+      {isEmpty?<p className={styles.emptyMsg}>EMPTY</p>:null}
     </ul> 
   )
 }
